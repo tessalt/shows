@@ -1,0 +1,31 @@
+<% if (user) { %>
+  <h1>
+    Hello<% if (user.givenName) { %>, <%= user.givenName %><% } %>
+  </h1>
+  <p><%- linkTo('Click here to log back out', logoutPath) %></p>
+<% } else { %>
+  <p><%- linkTo('Click here to create a user account.', addUserPath) %></p>
+  <p><%- linkTo('Click here to log in with Facebook or Twitter.', loginPath) %></p>
+<% } %>
+
+<script type="text/x-handlebars" data-template-name="application">
+  <p>{{#link-to 'shows.new'}}new show{{/link-to}}</p>
+  <p>{{#link-to 'shows'}}all shows{{/link-to}}</p>
+  {{outlet}}
+</script>
+
+<script type="text/x-handlebars" data-template-name="shows">
+  {{#each}}
+    {{#link-to 'show' this}} {{title}} {{/link-to}}
+  {{/each}}
+</script>
+
+<script type="text/x-handlebars" data-template-name="show">
+  {{title}}
+</script>
+
+<script type="text/x-handlebars" data-template-name="shows/new">
+  {{input type="text" placeholder="Show title" value=newTitle}}
+  {{input type="text" placeholder="Show id" value=newTvdbId}}
+  <button {{action 'createShow'}}>Create</button>
+</script>

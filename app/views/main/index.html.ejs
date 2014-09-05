@@ -25,7 +25,18 @@
 </script>
 
 <script type="text/x-handlebars" data-template-name="shows/new">
-  {{input type="text" placeholder="Show title" value=newTitle}}
-  {{input type="text" placeholder="Show id" value=newTvdbId}}
-  <button {{action 'createShow'}}>Create</button>
+  {{input type="text" placeholder="Show title" value=searchString action="searchShows"}}
+  {{#if loading}}<p>loading</p>{{/if}}
+  {{selectedShow.SeriesName}}
+  {{#if episodes}}<button {{action "createShow"}}>Add Series</button>{{/if}}
+  <ul>
+    {{#each results}}
+      <li {{action "getEpisodes" this}}>{{SeriesName}}</li>
+    {{/each}}
+  </ul>
+  <ul>
+    {{#each episodes}}
+      <li>{{EpisodeName}}</li>
+    {{/each}}
+  </ul>
 </script>

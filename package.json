@@ -9,7 +9,10 @@
     "passport-facebook": "0.1.x",
     "passport-yammer": "0.1.x",
     "bcrypt": "0.7.x",
-    "sqlite3": "2.1.x"
+    "sqlite3": "2.1.x",
+    "request": "~2.42.0",
+    "xml2js": "~0.4.4",
+    "q": "~1.0.1"
   },
   "devDependencies": {},
   "engines": {

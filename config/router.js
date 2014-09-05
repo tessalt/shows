@@ -53,4 +53,6 @@ router.get('/auth/google').to('Auth.google');
 router.get('/auth/google/callback').to('Auth.googleCallback');
 router.resource('users');
 router.resource('shows');
+router.resource('externalShows');
+router.resource('externalEpisodes');
 exports.router = router;

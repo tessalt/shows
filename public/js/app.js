@@ -1,6 +1,11 @@
 var App = Ember.Application.create();
 
-App.ApplicationAdapter = DS.RESTAdapter.extend();
+App.ApplicationAdapter = DS.RESTAdapter.extend({
+  pathForType: function(type) {
+     var decamelized = Ember.String.decamelize(type);
+    return Ember.String.pluralize(decamelized);
+  }
+});
 
 App.Router.map(function() {
   this.resource('shows', {path: '/'});
@@ -25,7 +30,22 @@ App.Show = DS.Model.extend({
   tvdbId: DS.attr('number')
 });
 
+App.ExternalShow = DS.Model.extend({
+  SeriesName: DS.attr('string')
+});
+
+App.ExternalEpisode = DS.Model.extend({
+  EpisodeName: DS.attr('string'),
+  EpisodeNumber: DS.attr('number'),
+  SeasonNumber: DS.attr('number'),
+  overview: DS.attr('string')
+});
+
 App.ShowsNewController = Ember.Controller.extend({
+  results: [],
+  loading: false,
+  selectedShow: '',
+  episodes: [],
   actions: {
     createShow: function() {
       var title = this.get('newTitle');
@@ -42,8 +62,27 @@ App.ShowsNewController = Ember.Controller.extend({
         this.transitionToRoute('show', show);
       }.bind(this));
     },
-    transitionToShow: function() {
-
+    searchShows: function() {
+      var self = this;
+      var query = this.get('searchString');
+      this.set('loading', true);
+      this.store.find('externalShow', {query: query}).then(function(results){
+        self.set('loading', false);
+        self.set('results', results.content);
+      });
+    },
+    getEpisodes: function(seriesId) {
+      var self = this;
+      this.set('selectedShow', seriesId);
+      this.set('results', []);
+      this.set('loading', true);
+      this.store.find('externalEpisode', {id: this.selectedShow.id}).then(function(results){
+        self.set('loading', false);
+        self.set('episodes', results.content);
+      });
+    },
+    createShow: function() {
+      
     }
   }
 });

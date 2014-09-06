@@ -24,7 +24,7 @@ App.ShowRoute = Ember.Route.extend({
     return {
       show: this.store.find('show', params.show_id),
       episodes: this.store.find('episode', {showId: params.show_id})
-    } 
+    }
   }
 });
 
@@ -118,12 +118,11 @@ App.ShowsNewController = Ember.Controller.extend({
           });
           promises.push(episode.save());
         });
-        Ember.RSVP.all(promises).then(function(blah){
-          console.log(blah);
-          self.transitionToRoute('show', self.selectedShow);
+        Ember.RSVP.all(promises).then(function(){
+          self.transitionToRoute('show', self.selectedShow.id);
         }, function(error){
           console.log(error);
-        });        
+        });
       });
     }
   }

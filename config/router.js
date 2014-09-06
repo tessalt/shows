@@ -55,4 +55,5 @@ router.resource('users');
 router.resource('shows');
 router.resource('externalShows');
 router.resource('externalEpisodes');
+router.resource('episodes');
 exports.router = router;

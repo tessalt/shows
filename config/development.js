@@ -38,9 +38,8 @@ var config = {
     defaultAdapter: 'sqlite'
   }
 , sessions: {
-    store: 'filesystem'
-  , filename: '_session_store.json'
-  , key: 'sid'
+    store: 'cookie'
+  , key: 'did'
   , expiry: 14 * 24 * 60 * 60
   }
 };

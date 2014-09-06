@@ -27,7 +27,8 @@ App.ShowRoute = Ember.Route.extend({
 
 App.Show = DS.Model.extend({
   title: DS.attr('string'),
-  tvdbId: DS.attr('number')
+  tvdbId: DS.attr('number'),
+  episodes: DS.hasMany('episode')
 });
 
 App.ExternalShow = DS.Model.extend({
@@ -39,6 +40,22 @@ App.ExternalEpisode = DS.Model.extend({
   EpisodeNumber: DS.attr('number'),
   SeasonNumber: DS.attr('number'),
   overview: DS.attr('string')
+});
+
+App.Episode = DS.Model.extend({
+  name: DS.attr('string'),
+  showId: DS.attr('number'),
+  show: DS.belongsTo('show')
+})
+
+
+App.ShowsController = Ember.ArrayController.extend({
+  actions: {
+    deleteShow: function(show) {
+      show.deleteRecord();
+      show.save();
+    }
+  }
 });
 
 App.ShowsNewController = Ember.Controller.extend({
@@ -71,9 +88,14 @@ App.ShowsNewController = Ember.Controller.extend({
         self.set('results', results.content);
       });
     },
-    getEpisodes: function(seriesId) {
+    getEpisodes: function(selectedSeries) {
       var self = this;
-      this.set('selectedShow', seriesId);
+      var series = this.store.createRecord('show', {
+        id: selectedSeries.get('id'),
+        title: selectedSeries.get('SeriesName'),
+        tvdbId: selectedSeries.get('id')
+      });
+      this.set('selectedShow', series);
       this.set('results', []);
       this.set('loading', true);
       this.store.find('externalEpisode', {id: this.selectedShow.id}).then(function(results){
@@ -82,7 +104,25 @@ App.ShowsNewController = Ember.Controller.extend({
       });
     },
     createShow: function() {
-      
+      var self = this;
+      var promises = [];
+      this.selectedShow.save().then(function(){
+        self.episodes.forEach(function(item){
+          var episode = self.store.createRecord('episode', {
+            name: item.get('EpisodeName'),
+            showId: self.selectedShow.id
+          }, function(error){
+            console.log(error);
+          });
+          promises.push(episode.save());
+        });
+        Ember.RSVP.all(promises).then(function(blah){
+          console.log(blah);
+          self.transitionToRoute('show', self.selectedShow);
+        }, function(error){
+          console.log(error);
+        });        
+      });
     }
   }
 });

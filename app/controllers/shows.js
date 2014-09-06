@@ -34,15 +34,21 @@ var Shows = function () {
 
   this.show = function (req, resp, params) {
     var self = this;
-    geddy.model.Show.first(params.id, function(err, show){
+    geddy.model.Show.first(params.id, {includes: 'episodes'}, function(err, show){
       if (err) {
         throw err;
       }
       if (!show) {
         throw new geddy.errors.NotFoundError();
-      } else {
+      } else {       
+        var episodes = show.episodes;
+        var episodeIndexes = show.episodes.map(function(ep, index){
+          return ep.id;
+        });
+        show.episodes = episodeIndexes;
         var response = {
-          show: show
+          show: show, 
+          episodes: episodes
         }
         self.respond(response);
       }
@@ -96,7 +102,8 @@ var Shows = function () {
           if (err) {
             throw err;
           }
-          self.respondWith(show);
+          var response = {show: show};
+          self.respond(response);
         });
       }
     });

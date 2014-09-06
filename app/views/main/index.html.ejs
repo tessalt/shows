@@ -16,12 +16,17 @@
 
 <script type="text/x-handlebars" data-template-name="shows">
   {{#each}}
-    {{#link-to 'show' this}} {{title}} {{/link-to}}
+    <p>{{#link-to 'show' id}} {{title}} {{/link-to}} | <button {{action "deleteShow" this}}>delete</button></p>
   {{/each}}
 </script>
 
 <script type="text/x-handlebars" data-template-name="show">
   {{title}}
+  <ul>
+  {{#each episodes}}
+    <li>{{name}}</li>
+  {{/each}}
+  </ul>
 </script>
 
 <script type="text/x-handlebars" data-template-name="shows/new">

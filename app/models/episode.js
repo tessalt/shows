@@ -1,15 +1,14 @@
-var Show = function () {
+var Episode = function () {
 
   this.defineProperties({
-    title: {type: 'string', required: true},
-    tvdbId: {type: 'number', required: true}
+    name: {type: 'string', required: true},
+    number: {type: 'number'},
+    season: {type: 'number'},
+    description: {type: 'text'}
   });
 
-  this.hasMany('Episodes');
-  this.validatesPresent('title');
-  this.validatesPresent('tvdbId');
-
-  //validate that is correct
+  this.belongsTo('Show');
+  this.validatesPresent('name');
 
   /*
   this.property('login', 'string', {required: true});
@@ -37,15 +36,15 @@ var Show = function () {
 
 /*
 // Can also define them on the prototype
-Show.prototype.someOtherMethod = function () {
+Episode.prototype.someOtherMethod = function () {
   // Do some other stuff
 };
 // Can also define static methods and properties
-Show.someStaticMethod = function () {
+Episode.someStaticMethod = function () {
   // Do some other stuff
 };
-Show.someStaticProperty = 'YYZ';
+Episode.someStaticProperty = 'YYZ';
 */
 
-Show = geddy.model.register('Show', Show);
+Episode = geddy.model.register('Episode', Episode);
 

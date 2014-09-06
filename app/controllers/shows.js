@@ -34,21 +34,15 @@ var Shows = function () {
 
   this.show = function (req, resp, params) {
     var self = this;
-    geddy.model.Show.first(params.id, {includes: 'episodes'}, function(err, show){
+    geddy.model.Show.first(params.id, function(err, show){
       if (err) {
         throw err;
       }
       if (!show) {
         throw new geddy.errors.NotFoundError();
-      } else {       
-        var episodes = show.episodes;
-        var episodeIndexes = show.episodes.map(function(ep, index){
-          return ep.id;
-        });
-        show.episodes = episodeIndexes;
+      } else {            
         var response = {
-          show: show, 
-          episodes: episodes
+          show: show
         }
         self.respond(response);
       }

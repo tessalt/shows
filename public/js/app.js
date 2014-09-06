@@ -2,7 +2,7 @@ var App = Ember.Application.create();
 
 App.ApplicationAdapter = DS.RESTAdapter.extend({
   pathForType: function(type) {
-     var decamelized = Ember.String.decamelize(type);
+    var decamelized = Ember.String.decamelize(type);
     return Ember.String.pluralize(decamelized);
   }
 });
@@ -21,7 +21,10 @@ App.ShowsRoute = Ember.Route.extend({
 
 App.ShowRoute = Ember.Route.extend({
   model: function(params) {
-    return this.store.find('show', params.show_id);
+    return {
+      show: this.store.find('show', params.show_id),
+      episodes: this.store.find('episode', {showId: params.show_id})
+    } 
   }
 });
 
@@ -30,6 +33,12 @@ App.Show = DS.Model.extend({
   tvdbId: DS.attr('number'),
   episodes: DS.hasMany('episode')
 });
+
+App.Episode = DS.Model.extend({
+  name: DS.attr('string'),
+  showId: DS.attr('number'),
+  show: DS.belongsTo('show')
+})
 
 App.ExternalShow = DS.Model.extend({
   SeriesName: DS.attr('string')
@@ -41,13 +50,6 @@ App.ExternalEpisode = DS.Model.extend({
   SeasonNumber: DS.attr('number'),
   overview: DS.attr('string')
 });
-
-App.Episode = DS.Model.extend({
-  name: DS.attr('string'),
-  showId: DS.attr('number'),
-  show: DS.belongsTo('show')
-})
-
 
 App.ShowsController = Ember.ArrayController.extend({
   actions: {

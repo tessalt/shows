@@ -3,7 +3,7 @@ var Episodes = function () {
 
   this.index = function (req, resp, params) {
     var self = this;    
-    geddy.model.Episode.all(function(err, episodes){
+    geddy.model.Episode.all({showId: params.showId}, {},function(err, episodes){
       if (err) {
         throw err;
       }
@@ -37,7 +37,20 @@ var Episodes = function () {
   };
 
   this.show = function (req, resp, params) {
-    this.respond({params: params});
+    var self = this;
+    geddy.model.Episode.first(params.id, function(err, episode){
+      if (err) {
+        throw err;
+      }
+      if (!episode) {
+        throw new geddy.errors.NotFoundError();
+      } else {            
+        var response = {
+          episode: episode
+        }
+        self.respond(response);
+      }
+    });
   };
 
   this.edit = function (req, resp, params) {

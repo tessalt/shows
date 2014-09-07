@@ -37,8 +37,16 @@ App.Show = DS.Model.extend({
 App.Episode = DS.Model.extend({
   name: DS.attr('string'),
   showId: DS.attr('number'),
-  show: DS.belongsTo('show')
-})
+  show: DS.belongsTo('show'),
+  votes: DS.hasMany('vote')
+});
+
+App.Vote = DS.Model.extend({
+  userId: DS.attr('string'),
+  episode: DS.belongsTo('episode'),
+  episodeId: DS.attr('string'),
+  direction: DS.attr('number')
+});
 
 App.ExternalShow = DS.Model.extend({
   SeriesName: DS.attr('string')
@@ -56,6 +64,29 @@ App.ShowsController = Ember.ArrayController.extend({
     deleteShow: function(show) {
       show.deleteRecord();
       show.save();
+    }
+  }
+});
+
+App.EpisodeController = Ember.ObjectController.extend({
+  voteCount: function() {
+    var votes = this.get('model.votes').content;
+    var total = 0;
+    for (var i = 0; i < this.get('model.votes.length'); i++) {
+      total += parseInt(votes[i].get('direction'));
+    }
+    return total;
+  }.property('model.votes.length'),
+  actions: {
+    vote: function(direction) {
+      var self = this;
+      var vote = this.store.createRecord('vote', {
+        direction: direction,
+        episodeId: self.model.get('id')
+      });
+      vote.save().then(function(){
+        vote.set('episode', self.model);
+      });
     }
   }
 });

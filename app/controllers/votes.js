@@ -1,28 +1,13 @@
-var Episodes = function () {
+var Votes = function () {
   this.respondsWith = ['json'];
 
   this.index = function (req, resp, params) {
     var self = this;
-    geddy.model.Episode.all({showId: params.showId}, {includes: 'votes'},function(err, episodes){
-      var eps = [];
-      var votes = [];
-      episodes.forEach(function(episode) {
-        var epvotes = [];
-        if (episode.votes) {
-          votes = votes.concat(episode.votes);
-          epvotes = episode.votes.map(function(vote){
-            return vote.id;
-          });
-        }
-        episode.votes = epvotes;
-        eps.push(episode);
-      });
-
+    geddy.model.Vote.all({episodeId: params.episodeId}, {},function(err, votes){
       if (err) {
         throw err;
       }
       var response = {
-        episodes: eps,
         votes: votes
       }
       self.respond(response);
@@ -31,16 +16,17 @@ var Episodes = function () {
 
   this.create = function (req, resp, params) {
     var self = this;
-    var episode = geddy.model.Episode.create(params.episode);
-    if (!episode.isValid()) {
-      this.respondWith(episode);
+    params.vote.userId = this.session.get('userId');
+    var vote = geddy.model.Vote.create(params.vote);
+    if (!vote.isValid()) {
+      this.respondWith(vote);
     } else {
-      episode.save(function(err, data) {
+      vote.save(function(err, data) {
         if (err) {
           throw err;
         }
         var response = {
-          episode: episode
+          vote: vote
         }
         self.respond(response);
       });
@@ -49,15 +35,15 @@ var Episodes = function () {
 
   this.show = function (req, resp, params) {
     var self = this;
-    geddy.model.Episode.first(params.id, function(err, episode){
+    geddy.model.Vote.first(params.id, function(err, vote){
       if (err) {
         throw err;
       }
-      if (!episode) {
+      if (!vote) {
         throw new geddy.errors.NotFoundError();
       } else {
         var response = {
-          episode: episode
+          vote: vote
         }
         self.respond(response);
       }
@@ -74,10 +60,26 @@ var Episodes = function () {
   };
 
   this.remove = function (req, resp, params) {
-    this.respond({params: params});
+    var self = this;
+    geddy.model.Vote.first(params.id, function(err, vote){
+      if (err) {
+        throw err;
+      }
+      if (!vote) {
+        throw new geddy.errors.BadRequestError();
+      } else {
+        geddy.model.Vote.remove(params.id, function(err){
+          if (err) {
+            throw err;
+          }
+          var response = {vote: vote};
+          self.respond(response);
+        });
+      }
+    });
   };
 
 };
 
-exports.Episodes = Episodes;
+exports.Votes = Votes;
 

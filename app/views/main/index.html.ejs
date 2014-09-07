@@ -23,8 +23,9 @@
 <script type="text/x-handlebars" data-template-name="show">
   {{show.title}}
   <ul>
-  {{#each episodes}}
-    <li>{{name}}</li>
+  {{#each episodes itemController="episode"}}
+    <li>{{name}} <button {{action "vote" 1}}>Upvote</button> <button {{action "vote" -1}}>downvote</button> {{voteCount}}
+    </li>
   {{/each}}
   </ul>
 </script>

@@ -1,15 +1,14 @@
-var Episode = function () {
+var Vote = function () {
 
   this.defineProperties({
-    name: {type: 'string', required: true},
-    number: {type: 'number'},
-    season: {type: 'number'},
-    description: {type: 'text'}
+    userId: {type: 'string', required: true},
+    direction: {type: 'number', required: true}
   });
 
-  this.belongsTo('Show');
-  this.hasMany('Vote');
-  this.validatesPresent('name');
+  this.validatesPresent('userId');
+  this.validatesPresent('direction');
+
+  this.belongsTo('Episode');
 
   /*
   this.property('login', 'string', {required: true});
@@ -37,15 +36,15 @@ var Episode = function () {
 
 /*
 // Can also define them on the prototype
-Episode.prototype.someOtherMethod = function () {
+Vote.prototype.someOtherMethod = function () {
   // Do some other stuff
 };
 // Can also define static methods and properties
-Episode.someStaticMethod = function () {
+Vote.someStaticMethod = function () {
   // Do some other stuff
 };
-Episode.someStaticProperty = 'YYZ';
+Vote.someStaticProperty = 'YYZ';
 */
 
-Episode = geddy.model.register('Episode', Episode);
+exports.Vote = Vote;
 

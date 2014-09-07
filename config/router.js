@@ -56,4 +56,5 @@ router.resource('shows');
 router.resource('externalShows');
 router.resource('externalEpisodes');
 router.resource('episodes');
+router.resource('votes');
 exports.router = router;

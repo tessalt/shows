@@ -35,6 +35,7 @@
   {{#if loading}}<p>loading</p>{{/if}}
   {{selectedShow.SeriesName}}
   {{#if episodes}}<button {{action "createShow"}}>Add Series</button>{{/if}}
+  <p>{{errorMsg}}</p>
   <ul>
     {{#each results}}
       <li {{action "getEpisodes" this}}>{{SeriesName}}</li>

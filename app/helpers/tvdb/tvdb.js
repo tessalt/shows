@@ -23,12 +23,20 @@ Tvdb.prototype.search = function(string) {
       explicitArray: false,
       emptyTag: null
     }, function(error, result){
-      if (result.Data && result.Data.Series.length) {
-        deferred.resolve(result.Data.Series);
-      } else if (result.Data) {
-        deferred.resolve(result.Data);
+      if (error) {
+        deferred.reject(error);
       } else {
-        deferred.reject(result.Error);
+        if (result.Data) {
+          if (result.Data.Series.seriesid) {
+            var series = [];
+            series.push(result.Data.Series);
+            deferred.resolve(series);
+          } else {
+            deferred.resolve(result.Data.Series);
+          }
+        } else {
+          deferred.resolve({});
+        }
       }
     });
   });

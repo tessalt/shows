@@ -8,16 +8,14 @@ var ExternalShows = function () {
    this.index = function(req, resp, params) {
     var self = this;
     tvdb.search(params.query).then(function(data){
-      var external_shows = [];
-      if (data.Series) {
-        external_shows.push(data.Series);
-      } else {
-        external_shows = data;
-      }
+      console.log(data);
+      external_shows = data;
       var response = {
         external_shows: external_shows
       }
       self.respond(response);
+    }, function(error){
+      self.respond(err);
     });
   }
 

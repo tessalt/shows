@@ -2,7 +2,7 @@ var Shows = function () {
   this.respondsWith = ['json'];
 
   this.index = function (req, resp, params) {
-    var self = this;    
+    var self = this;
     geddy.model.Show.all(function(err, shows){
       if (err) {
         throw err;
@@ -40,7 +40,7 @@ var Shows = function () {
       }
       if (!show) {
         throw new geddy.errors.NotFoundError();
-      } else {            
+      } else {
         var response = {
           show: show
         }
@@ -92,12 +92,15 @@ var Shows = function () {
       if (!show) {
         throw new geddy.errors.BadRequestError();
       } else {
+        // also will have to remove all related episodes and votes
         geddy.model.Show.remove(params.id, function(err){
           if (err) {
             throw err;
           }
           var response = {show: show};
-          self.respond(response);
+          geddy.model.Episode.remove({showId: params.id}, function(err) {
+            self.respond(response);
+          })
         });
       }
     });

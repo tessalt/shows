@@ -96,22 +96,8 @@ App.ShowsNewController = Ember.Controller.extend({
   loading: false,
   selectedShow: '',
   episodes: [],
+  errorMsg: '',
   actions: {
-    createShow: function() {
-      var title = this.get('newTitle');
-      var tvdbId = this.get('newTvdbId');
-      if (!title) { return false; }
-      if (!title.trim()) { return; }
-      var show = this.store.createRecord('show', {
-        title: title,
-        tvdbId: tvdbId
-      });
-      this.set('newTitle', '');
-      this.set('newTvdbId', '');
-      show.save().then(function(){
-        this.transitionToRoute('show', show);
-      }.bind(this));
-    },
     searchShows: function() {
       var self = this;
       var query = this.get('searchString');
@@ -119,6 +105,8 @@ App.ShowsNewController = Ember.Controller.extend({
       this.store.find('externalShow', {query: query}).then(function(results){
         self.set('loading', false);
         self.set('results', results.content);
+      }, function(error){
+        console.log(error);
       });
     },
     getEpisodes: function(selectedSeries) {

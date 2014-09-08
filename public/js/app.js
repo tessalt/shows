@@ -104,9 +104,15 @@ App.ShowsNewController = Ember.Controller.extend({
       this.set('loading', true);
       this.store.find('externalShow', {query: query}).then(function(results){
         self.set('loading', false);
-        self.set('results', results.content);
+        if (results.content.length) {
+          self.set('results', results.content);
+        } else {
+          self.set('results', '');
+          self.set('errorMsg', 'No results');
+        }
       }, function(error){
-        console.log(error);
+        self.set('loading', false);
+        self.set('errorMsg', error.statusText);
       });
     },
     getEpisodes: function(selectedSeries) {

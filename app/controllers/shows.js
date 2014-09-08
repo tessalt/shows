@@ -16,19 +16,26 @@ var Shows = function () {
 
   this.create = function (req, resp, params) {
     var self = this;
-    var show = geddy.model.Show.create(params.show);
-    if (!show.isValid()) {
-      this.respondWith(show);
+    var user = this.session.get('userId');
+    if (user) {
+      var show = geddy.model.Show.create(params.show);
+      if (!show.isValid()) {
+        this.respondWith(show);
+      } else {
+        show.save(function(err, data) {
+          if (err) {
+            throw err;
+          }
+          var response = {
+            show: show
+          }
+          self.respond(response);
+        });
+      }
     } else {
-      show.save(function(err, data) {
-        if (err) {
-          throw err;
-        }
-        var response = {
-          show: show
-        }
-        self.respond(response);
-      });
+      var error = new Error('You must be authenticated to add a show');
+      error.statusCode = 403;
+      this.error(error);
     }
   };
 

@@ -140,6 +140,7 @@ App.ShowsNewController = Ember.Controller.extend({
             showId: self.selectedShow.id
           }, function(error){
             console.log(error);
+            self.set('errorMsg', error);
           });
           promises.push(episode.save());
         });
@@ -147,7 +148,14 @@ App.ShowsNewController = Ember.Controller.extend({
           self.transitionToRoute('show', self.selectedShow.id);
         }, function(error){
           console.log(error);
+          self.set('errorMsg', error);
         });
+      }, function(error) {
+        if (error.status === 403) {
+          self.set('errorMsg', 'You must be authenticated to add a new show');
+        } else {
+          self.set('errorMsg', error.statusText);
+        }
       });
     }
   }

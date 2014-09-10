@@ -1,15 +1,11 @@
 var Show = function () {
 
   this.defineProperties({
-    title: {type: 'string', required: true},
-    tvdbId: {type: 'number', required: true}
+    title: {type: 'string', required: true}
   });
 
   this.hasMany('Episodes');
   this.validatesPresent('title');
-  this.validatesPresent('tvdbId');
-
-  //validate that is correct
 
   /*
   this.property('login', 'string', {required: true});

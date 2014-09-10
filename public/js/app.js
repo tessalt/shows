@@ -97,10 +97,19 @@ App.ShowsNewController = Ember.Controller.extend({
   selectedShow: '',
   episodes: [],
   errorMsg: '',
+  searchShows: '',
   actions: {
+    clearSearch: function() {
+      this.set('results', []);
+      this.set('selectedShow', '');
+      this.set('episodes', '');
+      this.set('searchString', '');
+      this.set('errorMsg', '');
+    },
     searchShows: function() {
       var self = this;
       var query = this.get('searchString');
+      this.set('episodes', []);
       this.set('loading', true);
       this.store.find('externalShow', {query: query}).then(function(results){
         self.set('loading', false);
@@ -117,18 +126,23 @@ App.ShowsNewController = Ember.Controller.extend({
     },
     getEpisodes: function(selectedSeries) {
       var self = this;
-      var series = this.store.createRecord('show', {
-        id: selectedSeries.get('id'),
-        title: selectedSeries.get('SeriesName'),
-        tvdbId: selectedSeries.get('id')
-      });
-      this.set('selectedShow', series);
+      var existing = this.store.find('show', {id: selectedSeries.get('id')});
+      if (!existing) {
+        var series = this.store.createRecord('show', {
+          id: selectedSeries.get('id'),
+          title: selectedSeries.get('SeriesName'),
+          tvdbId: selectedSeries.get('id')
+        });
+        this.set('selectedShow', series);
+        this.set('loading', true);
+        this.store.find('externalEpisode', {id: this.selectedShow.id}).then(function(results){
+          self.set('loading', false);
+          self.set('episodes', results.content);
+        });
+      } else {
+        this.set('errorMsg', 'This show has already been added');
+      }
       this.set('results', []);
-      this.set('loading', true);
-      this.store.find('externalEpisode', {id: this.selectedShow.id}).then(function(results){
-        self.set('loading', false);
-        self.set('episodes', results.content);
-      });
     },
     createShow: function() {
       var self = this;
@@ -139,23 +153,22 @@ App.ShowsNewController = Ember.Controller.extend({
             name: item.get('EpisodeName'),
             showId: self.selectedShow.id
           }, function(error){
-            console.log(error);
             self.set('errorMsg', error);
           });
           promises.push(episode.save());
         });
         Ember.RSVP.all(promises).then(function(){
-          self.transitionToRoute('show', self.selectedShow.id);
+          var show = self.selectedShow;
+          self.set('selectedShow', '');
+          self.set('searchString', '');
+          self.set('episodes', []);
+          self.transitionToRoute('show', show.id);
         }, function(error){
-          console.log(error);
           self.set('errorMsg', error);
         });
       }, function(error) {
-        if (error.status === 403) {
-          self.set('errorMsg', 'You must be authenticated to add a new show');
-        } else {
-          self.set('errorMsg', error.statusText);
-        }
+        console.log(error);
+        self.set('errorMsg', error.responseText);
       });
     }
   }

@@ -1,5 +1,13 @@
+var passport = require('../helpers/passport')
+  , cryptPass = passport.cryptPass
+  , requireAuth = passport.requireAuth;
+
 var Shows = function () {
   this.respondsWith = ['json'];
+
+  this.before(requireAuth, {
+    except: ['index', 'show']
+  });
 
   this.index = function (req, resp, params) {
     var self = this;
@@ -16,10 +24,8 @@ var Shows = function () {
 
   this.create = function (req, resp, params) {
     var self = this;
-    var user = this.session.get('userId');
-    if (user) {
-      var existingShow = geddy.model.Show.first(params.show.id);
-      if (!existingShow) {
+    geddy.model.Show.first(params.show.id, function(err, show) {
+      if (!show) {
         var show = geddy.model.Show.create(params.show);
         if (!show.isValid()) {
           this.respondWith(show);
@@ -35,15 +41,14 @@ var Shows = function () {
           });
         }
       } else {
-       this.output(403, {'Content-Type': 'application/json'}, 'This show has already been added');
-     }
-    } else {
-      this.output(403, {'Content-Type': 'application/json'}, 'You must be authorized to add a new show');
-    }
+       self.output(403, {'Content-Type': 'application/json'}, 'This show has already been added');
+      }
+    });
   };
 
   this.show = function (req, resp, params) {
     var self = this;
+    console.log('test');
     geddy.model.Show.first(params.id, function(err, show){
       if (err) {
         throw err;

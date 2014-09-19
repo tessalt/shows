@@ -16,7 +16,7 @@ var Votes = function () {
 
   this.create = function (req, resp, params) {
     var self = this;
-    params.vote.userId = this.session.get('userId');
+    // params.vote.userId = this.session.get('userId');
     var vote = geddy.model.Vote.create(params.vote);
     if (!vote.isValid()) {
       this.respondWith(vote);

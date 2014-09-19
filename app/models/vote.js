@@ -5,7 +5,6 @@ var Vote = function () {
     direction: {type: 'number', required: true}
   });
 
-  this.validatesPresent('userId');
   this.validatesPresent('direction');
 
   this.belongsTo('Episode');

@@ -126,7 +126,7 @@ App.ShowsNewController = Ember.Controller.extend({
     },
     getEpisodes: function(selectedSeries) {
       var self = this;
-      var existing = this.store.find('show', {id: selectedSeries.get('id')});
+      var existing = this.store.getById('show', selectedSeries.get('id'));
       if (!existing) {
         var series = this.store.createRecord('show', {
           id: selectedSeries.get('id'),
@@ -140,7 +140,7 @@ App.ShowsNewController = Ember.Controller.extend({
           self.set('episodes', results.content);
         });
       } else {
-        this.set('errorMsg', 'This show has already been added');
+        this.set('errorMsg', 'Already added');
       }
       this.set('results', []);
     },

@@ -51,6 +51,7 @@ router.get('/auth/yammer').to('Auth.yammer');
 router.get('/auth/yammer/callback').to('Auth.yammerCallback');
 router.get('/auth/google').to('Auth.google');
 router.get('/auth/google/callback').to('Auth.googleCallback');
+router.get('/me').to('Main.getUser');
 router.resource('users');
 router.resource('shows');
 router.resource('externalShows');

@@ -13,9 +13,13 @@ App.Router.map(function() {
   this.resource('shows.new', {path: 'shows/new'});
 });
 
+
 App.ShowsRoute = Ember.Route.extend({
   model: function() {
-    return this.store.find('show');
+    return new Ember.RSVP.hash({
+      shows: this.store.find('show'),
+      user: App.User.get()
+    })
   }
 });
 
@@ -27,6 +31,16 @@ App.ShowRoute = Ember.Route.extend({
     }
   }
 });
+
+App.User = Ember.Object.extend();
+
+App.User.reopenClass({
+  get: function() {
+    return $.getJSON('/me').then(function(data){
+      return data;
+    });
+  }
+})
 
 App.Show = DS.Model.extend({
   title: DS.attr('string'),
@@ -59,7 +73,7 @@ App.ExternalEpisode = DS.Model.extend({
   overview: DS.attr('string')
 });
 
-App.ShowsController = Ember.ArrayController.extend({
+App.ShowsController = Ember.ObjectController.extend({
   errorMsg: '',
   actions: {
     deleteShow: function(show) {

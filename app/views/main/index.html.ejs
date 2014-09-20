@@ -15,9 +15,12 @@
 </script>
 
 <script type="text/x-handlebars" data-template-name="shows">
-{{errorMsg}}
-  {{#each}}
-    <p>{{#link-to 'show' id}} {{title}} {{/link-to}} | <button {{action "deleteShow" this}}>delete</button></p>
+  {{errorMsg}}
+  {{#each shows}}
+    {{#link-to 'show' id}} {{title}} {{/link-to}}
+    {{#if ../user.admin}}
+    | <button {{action "deleteShow" this}}>delete</button>
+    {{/if}}
   {{/each}}
 </script>
 

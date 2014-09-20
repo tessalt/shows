@@ -55,6 +55,13 @@ var Main = function () {
     });
   };
 
+  this.getUser = function (req, resp) {
+    var self = this;
+    geddy.model.User.first({id: this.session.get('userId')}, function (err, user) {
+      self.respond(user, {format: 'json'});
+    });
+  }
+
 };
 
 exports.Main = Main;

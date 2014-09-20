@@ -60,10 +60,14 @@ App.ExternalEpisode = DS.Model.extend({
 });
 
 App.ShowsController = Ember.ArrayController.extend({
+  errorMsg: '',
   actions: {
     deleteShow: function(show) {
+      var self = this;
       show.deleteRecord();
-      show.save();
+      show.save().catch(function(error){
+        self.set('errorMsg', error.responseText);
+      });
     }
   }
 });

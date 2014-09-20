@@ -5,9 +5,12 @@ var passport = require('../helpers/passport')
 var Shows = function () {
   this.respondsWith = ['json'];
 
-  this.before(requireAuth, {
-    except: ['index', 'show']
-  });
+  this.before(function(){
+    if (!(this.session.get('userId'))) {
+      throw new geddy.errors.BadRequestError();
+    }
+  }, {except: ['index', 'show']});
+
 
   this.index = function (req, resp, params) {
     var self = this;
@@ -48,7 +51,6 @@ var Shows = function () {
 
   this.show = function (req, resp, params) {
     var self = this;
-    console.log('test');
     geddy.model.Show.first(params.id, function(err, show){
       if (err) {
         throw err;
@@ -100,23 +102,33 @@ var Shows = function () {
 
   this.remove = function (req, resp, params) {
     var self = this;
-    geddy.model.Show.first(params.id, function(err, show){
+    var user = geddy.model.User.first(this.session.get('userId'), function(err, user){
       if (err) {
         throw err;
       }
-      if (!show) {
-        throw new geddy.errors.BadRequestError();
-      } else {
-        // also will have to remove all related episodes and votes
-        geddy.model.Show.remove(params.id, function(err){
+      if (user.admin) {
+        geddy.model.Show.first(params.id, function(err, show){
+
           if (err) {
             throw err;
           }
-          var response = {show: show};
-          geddy.model.Episode.remove({showId: params.id}, function(err) {
-            self.respond(response);
-          })
+          if (!show) {
+            throw new geddy.errors.BadRequestError();
+          } else {
+            // also will have to remove all related episodes and votes
+            geddy.model.Show.remove(params.id, function(err){
+              if (err) {
+                throw err;
+              }
+              var response = {show: show};
+              geddy.model.Episode.remove({showId: params.id}, function(err) {
+                self.respond(response);
+              })
+            });
+          }
         });
+      } else {
+        throw new geddy.errors.BadRequestError();
       }
     });
   };

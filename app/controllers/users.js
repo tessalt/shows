@@ -1,7 +1,6 @@
-var passport = require('../helpers/passport')
-  , generateHash = passport.generateHash
-  , requireAuth = passport.requireAuth;
-
+var passport = require('../helpers/passport'),
+    generateHash = passport.generateHash,
+    requireAuth = passport.requireAuth;
 
 var Users = function () {
 
@@ -61,57 +60,15 @@ var Users = function () {
       else {
         if (user.isValid()) {
           user.password = generateHash(user.password);
-
-          if (EMAIL_ACTIVATION) {
-            user.activationToken = generateHash(user.email);
-          }
-          else {
-            user.activatedAt = new Date();
-          }
+          user.activatedAt = new Date();
           user.save(function(err, data) {
-            var options = {}
-              , mailOptions
-              , mailCallback
-              , mailHtml
-              , mailText;
+            var options = {};
 
             if (err) {
               throw err;
             }
 
-            if (EMAIL_ACTIVATION) {
-              activationUrl = geddy.config.fullHostname + '/users/activate?token=' +
-                  encodeURIComponent(user.activationToken);
-              options.status = 'You have successfully signed up. ' +
-                  'Check your e-mail to activate your account.';
-
-              mailHtml = 'Welcome to ' + geddy.config.appName + '. ' +
-                  'Use the following URL to activate your account: ' +
-                  '<a href="' + activationUrl + '">' + activationUrl + '</a>.';
-              mailText = 'Welcome to ' + geddy.config.appName + '. ' +
-                  'Use the following URL to activate your account: ' +
-                  activationUrl + '.';
-
-              mailOptions = {
-                from: geddy.config.mailer.fromAddressUsername + '@' +
-                    geddy.config.hostname
-              , to: user.email
-              , subject: 'Welcome to ' + geddy.config.appName
-              , html: mailHtml
-              , text: mailText
-              };
-              mailCallback = function (err, data) {
-                if (err) {
-                  throw err;
-                }
-                self.respondWith(user, options);
-              };
-              geddy.mailer.sendMail(mailOptions, mailCallback);
-            }
-
-            else {
-              self.respondWith(user);
-            }
+            self.respondWith(user);
           });
         }
         else {

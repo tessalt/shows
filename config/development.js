@@ -42,6 +42,7 @@ var config = {
   , key: 'did'
   , expiry: 14 * 24 * 60 * 60
   }
+, adminId: '86598888'
 };
 
 module.exports = config;

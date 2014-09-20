@@ -7,6 +7,8 @@ var User = function () {
   , email: {type: 'string', required: true, on: ['create', 'update']}
   , activationToken: {type: 'string'}
   , activatedAt: {type: 'datetime'}
+  , twitterId: {type: 'string'}
+  , admin: {type: 'boolean'}
   });
 
   this.validatesLength('username', {min: 3});

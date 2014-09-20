@@ -2,7 +2,8 @@ var strategies = require('./strategies')
   , User = geddy.model.User
   , Passport = geddy.model.Passport
   , user
-  , _findOrCreateUser;
+  , _findOrCreateUser
+  , config = geddy.config.passport
 
 _findOrCreateUser = function (passport, profile, callback) {
   passport.getUser(function (err, data) {
@@ -17,6 +18,7 @@ _findOrCreateUser = function (passport, profile, callback) {
         userData = strategies[passport.authType].parseProfile(profile);
         user = User.create(userData);
         user.activatedAt = new Date(); // No e-mail activation required
+        user.admin = user.twitterId === config.adminId;
         // User won't have all required fields, force-save
         user.save({force: true}, function (err, data) {
           if (err) {
@@ -25,7 +27,7 @@ _findOrCreateUser = function (passport, profile, callback) {
           else {
             user.addPassport(passport);
             user.save({force: true}, function (err, data) {
-            //console.dir(user);
+            // console.dir(user);
             //console.dir(passport);
               if (err) {
                 callback(err, null);

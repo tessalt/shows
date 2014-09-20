@@ -18,6 +18,7 @@ module.exports = {
       else {
         userData.givenName = profile.username;
       }
+      userData.twitterId = profile.id;
       return userData;
     }
   }

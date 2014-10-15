@@ -9,7 +9,7 @@
 <% } %>
 
 <script type="text/x-handlebars" data-template-name="application">
-  <p>{{#link-to 'shows.new'}}new show{{/link-to}}</p>
+  <p>{{#link-to 'externalShows.search'}}new show{{/link-to}}</p>
   <p>{{#link-to 'shows'}}all shows{{/link-to}}</p>
   {{outlet}}
 </script>
@@ -51,4 +51,24 @@
       <li>{{EpisodeName}}</li>
     {{/each}}
   </ul>
+</script>
+
+<script type="text/x-handlebars" data-template-name="externalShows/search">
+  {{input type="text" placeholder="Search shows by title" value=keyword}}
+  <button {{action "search" keyword}}>Search</button>
+</script>
+
+<script type="text/x-handlebars" data-template-name="externalShows/searchResults">
+  <ul>
+  {{#each}}
+    <li>{{#link-to 'externalShow' this.id}}{{SeriesName}}{{/link-to}}</li>
+  {{/each}}
+  </ul>
+</script>
+
+<script type="text/x-handlebars" data-template-name="externalShow">
+  {{SeriesName}}
+  {{#each episodes}}
+    <p>{{EpisodeName}}</p>
+  {{/each}}
 </script>

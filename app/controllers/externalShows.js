@@ -18,6 +18,21 @@ var ExternalShows = function () {
     });
   }
 
+  this.show = function(req, resp, params) {
+    var self = this;
+    tvdb.getSeries(params.id).then(function(data){
+      console.log(data);
+      var response = {
+        external_show: {
+          id: data.id,
+          SeriesName: data.name,
+          episodes: data.episodes
+        }
+      }
+      self.respond(response);
+    });
+  }
+
 }
 
 exports.ExternalShows = ExternalShows;

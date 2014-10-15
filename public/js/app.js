@@ -11,6 +11,11 @@ App.Router.map(function() {
   this.resource('shows', {path: '/'});
   this.resource('show', {path: 'shows/:show_id'});
   this.resource('shows.new', {path: 'shows/new'});
+  this.resource('externalShows', {path: 'externalShows'}, function(){
+    this.route('search', {path: '/search'});
+    this.route('searchResults', {path: '/search/:keyword'});
+  });
+  this.resource('externalShow', {path: 'externalShows/:show_id'});
 });
 
 
@@ -29,6 +34,28 @@ App.ShowRoute = Ember.Route.extend({
       show: this.store.find('show', params.show_id),
       episodes: this.store.find('episode', {showId: params.show_id})
     }
+  }
+});
+
+App.ExternalShowsSearchRoute = Ember.Route.extend({
+  actions: {
+    search: function(keyword) {
+      this.transitionTo('externalShows.searchResults', keyword);
+    }
+  }
+});
+
+App.ExternalShowsSearchResultsRoute = Ember.Route.extend({
+  model: function(params) {
+    return this.store.find('externalShow', {query: params.keyword});
+  }
+});
+
+App.ExternalShowRoute = Ember.Route.extend({
+  model: function(params) {
+    return $.getJSON('/external_shows/' + params.show_id).then(function(data){
+      return data.external_show;
+    })
   }
 });
 
@@ -64,13 +91,6 @@ App.Vote = DS.Model.extend({
 
 App.ExternalShow = DS.Model.extend({
   SeriesName: DS.attr('string')
-});
-
-App.ExternalEpisode = DS.Model.extend({
-  EpisodeName: DS.attr('string'),
-  EpisodeNumber: DS.attr('number'),
-  SeasonNumber: DS.attr('number'),
-  overview: DS.attr('string')
 });
 
 App.ShowsController = Ember.ObjectController.extend({
@@ -117,31 +137,6 @@ App.ShowsNewController = Ember.Controller.extend({
   errorMsg: '',
   searchShows: '',
   actions: {
-    clearSearch: function() {
-      this.set('results', []);
-      this.set('selectedShow', '');
-      this.set('episodes', '');
-      this.set('searchString', '');
-      this.set('errorMsg', '');
-    },
-    searchShows: function() {
-      var self = this;
-      var query = this.get('searchString');
-      this.set('episodes', []);
-      this.set('loading', true);
-      this.store.find('externalShow', {query: query}).then(function(results){
-        self.set('loading', false);
-        if (results.content.length) {
-          self.set('results', results.content);
-        } else {
-          self.set('results', '');
-          self.set('errorMsg', 'No results');
-        }
-      }, function(error){
-        self.set('loading', false);
-        self.set('errorMsg', error.statusText);
-      });
-    },
     getEpisodes: function(selectedSeries) {
       var self = this;
       var existing = this.store.getById('show', selectedSeries.get('id'));
@@ -190,4 +185,8 @@ App.ShowsNewController = Ember.Controller.extend({
       });
     }
   }
+});
+
+App.ExternalShowsSearchController = Ember.Controller.extend({
+  keyword: ''
 });

@@ -16,10 +16,10 @@
 
 <script type="text/x-handlebars" data-template-name="shows">
   {{errorMsg}}
-  {{#each shows}}
-    {{#link-to 'show' id}} {{title}} {{/link-to}}
+  {{#each show in shows}}
+    {{#link-to 'show' id}} {{show.title}} {{/link-to}}
     {{#if ../user.admin}}
-    | <button {{action "deleteShow" this}}>delete</button>
+    | <button {{action "deleteShow" show}}>{{show.id}}</button>
     {{/if}}
   {{/each}}
 </script>
@@ -34,25 +34,6 @@
   </ul>
 </script>
 
-<script type="text/x-handlebars" data-template-name="shows/new">
-  {{input type="text" placeholder="Show title" value=searchString action="searchShows"}}
-  <button {{action "clearSearch"}}>Clear</button>
-  {{#if loading}}<p>loading</p>{{/if}}
-  {{selectedShow.SeriesName}}
-  {{#if episodes}}<button {{action "createShow"}}>Add Series</button>{{/if}}
-  <p>{{errorMsg}}</p>
-  <ul>
-    {{#each results}}
-      <li {{action "getEpisodes" this}}>{{SeriesName}}</li>
-    {{/each}}
-  </ul>
-  <ul>
-    {{#each episodes}}
-      <li>{{EpisodeName}}</li>
-    {{/each}}
-  </ul>
-</script>
-
 <script type="text/x-handlebars" data-template-name="externalShows/search">
   {{input type="text" placeholder="Search shows by title" value=keyword}}
   <button {{action "search" keyword}}>Search</button>
@@ -61,13 +42,14 @@
 <script type="text/x-handlebars" data-template-name="externalShows/searchResults">
   <ul>
   {{#each}}
-    <li>{{#link-to 'externalShow' this.id}}{{SeriesName}}{{/link-to}}</li>
+    <li>{{#link-to 'shows.new' this.id}}{{SeriesName}}{{/link-to}}</li>
   {{/each}}
   </ul>
 </script>
 
-<script type="text/x-handlebars" data-template-name="externalShow">
-  {{SeriesName}}
+<script type="text/x-handlebars" data-template-name="shows/new">
+  <button {{action "createShow" this}}>Create</button>
+  {{show.SeriesName}}
   {{#each episodes}}
     <p>{{EpisodeName}}</p>
   {{/each}}

@@ -10,14 +10,13 @@ App.ApplicationAdapter = DS.RESTAdapter.extend({
 App.Router.map(function() {
   this.resource('shows', {path: '/'});
   this.resource('show', {path: 'shows/:show_id'});
-  this.resource('shows.new', {path: 'shows/new'});
+  this.resource('shows.new', {path: 'shows/new/:show_id'});
   this.resource('externalShows', {path: 'externalShows'}, function(){
     this.route('search', {path: '/search'});
     this.route('searchResults', {path: '/search/:keyword'});
   });
   this.resource('externalShow', {path: 'externalShows/:show_id'});
 });
-
 
 App.ShowsRoute = Ember.Route.extend({
   model: function() {
@@ -37,6 +36,17 @@ App.ShowRoute = Ember.Route.extend({
   }
 });
 
+App.ShowsNewRoute = Ember.Route.extend({
+  model: function(params) {
+    return $.getJSON('/external_shows/' + params.show_id).then(function (data){
+      return {
+        show: data.external_show,
+        episodes: data.external_episodes
+      }
+    });
+  }
+});
+
 App.ExternalShowsSearchRoute = Ember.Route.extend({
   actions: {
     search: function(keyword) {
@@ -48,14 +58,6 @@ App.ExternalShowsSearchRoute = Ember.Route.extend({
 App.ExternalShowsSearchResultsRoute = Ember.Route.extend({
   model: function(params) {
     return this.store.find('externalShow', {query: params.keyword});
-  }
-});
-
-App.ExternalShowRoute = Ember.Route.extend({
-  model: function(params) {
-    return $.getJSON('/external_shows/' + params.show_id).then(function(data){
-      return data.external_show;
-    })
   }
 });
 
@@ -129,59 +131,24 @@ App.EpisodeController = Ember.ObjectController.extend({
   }
 });
 
-App.ShowsNewController = Ember.Controller.extend({
-  results: [],
-  loading: false,
-  selectedShow: '',
-  episodes: [],
-  errorMsg: '',
-  searchShows: '',
+App.ShowsNewController = Ember.ObjectController.extend({
   actions: {
-    getEpisodes: function(selectedSeries) {
-      var self = this;
-      var existing = this.store.getById('show', selectedSeries.get('id'));
-      if (!existing) {
-        var series = this.store.createRecord('show', {
-          id: selectedSeries.get('id'),
-          title: selectedSeries.get('SeriesName'),
-          tvdbId: selectedSeries.get('id')
-        });
-        this.set('selectedShow', series);
-        this.set('loading', true);
-        this.store.find('externalEpisode', {id: this.selectedShow.id}).then(function(results){
-          self.set('loading', false);
-          self.set('episodes', results.content);
-        });
-      } else {
-        this.set('errorMsg', 'Already added');
-      }
-      this.set('results', []);
-    },
     createShow: function() {
       var self = this;
-      var promises = [];
-      this.selectedShow.save().then(function(){
-        self.episodes.forEach(function(item){
+      var show = this.store.createRecord('show', {
+        title: this.model.show.SeriesName,
+        id: this.model.show.id
+      });
+      show.save().then(function() {
+        Ember.RSVP.all(self.model.episodes.map(function(rawEpisode){
           var episode = self.store.createRecord('episode', {
-            name: item.get('EpisodeName'),
-            showId: self.selectedShow.id
-          }, function(error){
-            self.set('errorMsg', error);
+            name: rawEpisode.EpisodeName,
+            showId: self.model.show.id
           });
-          promises.push(episode.save());
-        });
-        Ember.RSVP.all(promises).then(function(){
-          var show = self.selectedShow;
-          self.set('selectedShow', '');
-          self.set('searchString', '');
-          self.set('episodes', []);
-          self.transitionToRoute('show', show.id);
-        }, function(error){
-          self.set('errorMsg', error);
-        });
-      }, function(error) {
-        console.log(error);
-        self.set('errorMsg', error.responseText);
+          return episode.save();
+        })).then(function(something){
+          self.transitionToRoute('show', self.model.show.id);
+        })
       });
     }
   }
@@ -190,3 +157,7 @@ App.ShowsNewController = Ember.Controller.extend({
 App.ExternalShowsSearchController = Ember.Controller.extend({
   keyword: ''
 });
+
+// App.ExternalShowController = Ember.Controller.extend({
+
+// });

@@ -25,9 +25,9 @@ var ExternalShows = function () {
       var response = {
         external_show: {
           id: data.id,
-          SeriesName: data.name,
-          episodes: data.episodes
-        }
+          SeriesName: data.name
+        },
+        external_episodes: data.episodes
       }
       self.respond(response);
     });

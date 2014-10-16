@@ -135,21 +135,29 @@ App.ShowsNewController = Ember.ObjectController.extend({
   actions: {
     createShow: function() {
       var self = this;
-      var show = this.store.createRecord('show', {
-        title: this.model.show.SeriesName,
-        id: this.model.show.id
-      });
-      show.save().then(function() {
-        Ember.RSVP.all(self.model.episodes.map(function(rawEpisode){
-          var episode = self.store.createRecord('episode', {
-            name: rawEpisode.EpisodeName,
-            showId: self.model.show.id
-          });
-          return episode.save();
-        })).then(function(something){
-          self.transitionToRoute('show', self.model.show.id);
-        })
-      });
+      try {
+        var show = this.store.createRecord('show', {
+          title: this.model.show.SeriesName,
+          id: this.model.show.id
+        });
+      } catch (error) {
+        console.log(error);
+      }
+      if (show) {
+        show.save().then(function() {
+          Ember.RSVP.all(self.model.episodes.map(function(rawEpisode){
+            var episode = self.store.createRecord('episode', {
+              name: rawEpisode.EpisodeName,
+              showId: self.model.show.id
+            });
+            return episode.save();
+          })).then(function(something){
+            self.transitionToRoute('show', self.model.show.id);
+          })
+        }, function(error){
+          console.log(error);
+        });
+      }
     }
   }
 });
@@ -157,7 +165,3 @@ App.ShowsNewController = Ember.ObjectController.extend({
 App.ExternalShowsSearchController = Ember.Controller.extend({
   keyword: ''
 });
-
-// App.ExternalShowController = Ember.Controller.extend({
-
-// });

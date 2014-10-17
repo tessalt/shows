@@ -134,6 +134,11 @@ App.EpisodeController = Ember.ObjectController.extend({
   }
 });
 
+App.ExternalShowsSearchController = Ember.Controller.extend({
+  keyword: '',
+  errorMsg: ''
+});
+
 App.ShowsNewController = Ember.ObjectController.extend({
   actions: {
     createShow: function() {
@@ -163,8 +168,4 @@ App.ShowsNewController = Ember.ObjectController.extend({
       }
     }
   }
-});
-
-App.ExternalShowsSearchController = Ember.Controller.extend({
-  keyword: ''
 });

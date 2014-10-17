@@ -4,7 +4,6 @@
   </h1>
   <p><%- linkTo('Click here to log back out', logoutPath) %></p>
 <% } else { %>
-  <p><%- linkTo('Click here to create a user account.', addUserPath) %></p>
   <p><%- linkTo('Click here to log in with Facebook or Twitter.', loginPath) %></p>
 <% } %>
 
@@ -17,10 +16,12 @@
 <script type="text/x-handlebars" data-template-name="shows">
   {{errorMsg}}
   {{#each show in shows}}
-    {{#link-to 'show' show.id}} {{show.title}} {{/link-to}}
-    {{#if ../user.admin}}
-    | <button {{action "deleteShow" show}}>{{show.id}}</button>
-    {{/if}}
+    <li>
+      {{#link-to 'show' show.id}} {{show.title}} {{/link-to}}
+      {{#if ../user.admin}}
+        <button {{action "deleteShow" show}}>delete</button>
+      {{/if}}
+    </li>
   {{/each}}
 </script>
 
@@ -28,8 +29,7 @@
   {{show.title}}
   <ul>
   {{#each episodes itemController="episode"}}
-    <li>{{name}} <button {{action "vote" 1}}>Upvote</button> <button {{action "vote" -1}}>downvote</button> {{voteCount}}
-    </li>
+    <li>{{name}} <button {{action "vote" 1}}>Upvote</button> <button {{action "vote" -1}}>downvote</button> {{voteCount}} </li>
   {{/each}}
   </ul>
 </script>
@@ -44,6 +44,8 @@
   <ul>
   {{#each}}
     <li>{{#link-to 'shows.new' this.id}}{{SeriesName}}{{/link-to}}</li>
+  {{else}}
+    No Results
   {{/each}}
   </ul>
 </script>

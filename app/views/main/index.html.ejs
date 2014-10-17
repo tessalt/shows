@@ -34,17 +34,13 @@
   </ul>
 </script>
 
-<script type="text/x-handlebars" data-template-name="externalShows">
-  EXTERNAL shows
-  {{outlet}}
-</script>
-
 <script type="text/x-handlebars" data-template-name="externalShows/search">
   {{input type="text" placeholder="Search shows by title" value=keyword}}
   <button {{action "search" keyword}}>Search</button>
+  {{outlet}}
 </script>
 
-<script type="text/x-handlebars" data-template-name="externalShows/searchResults">
+<script type="text/x-handlebars" data-template-name="externalShows/search/results">
   <ul>
   {{#each}}
     <li>{{#link-to 'shows.new' this.id}}{{SeriesName}}{{/link-to}}</li>

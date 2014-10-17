@@ -11,9 +11,9 @@ App.Router.map(function() {
   this.resource('shows', {path: '/'});
   this.resource('show', {path: 'shows/:show_id'});
   this.resource('shows.new', {path: 'shows/new/:show_id'});
-  this.resource('externalShows', {path: 'externalShows'}, function(){
-    this.route('search', {path: '/search'});
-    this.route('searchResults', {path: '/search/:keyword'});
+  this.resource('externalShows', {path: 'externalShows'});
+  this.resource('externalShows.search', {path: 'externalShows/search'}, function() {
+    this.route('results', {path: ':keyword'});
   });
   this.resource('externalShow', {path: 'externalShows/:show_id'});
 });
@@ -50,7 +50,7 @@ App.ShowsNewRoute = Ember.Route.extend({
 App.ExternalShowsSearchRoute = Ember.Route.extend({
   actions: {
     search: function(keyword) {
-      this.transitionTo('externalShows.searchResults', keyword);
+      this.transitionTo('externalShows.search.results', keyword);
     }
   }
 });

@@ -10,6 +10,7 @@
 <script type="text/x-handlebars" data-template-name="application">
   <p>{{#link-to 'externalShows.search'}}new show{{/link-to}}</p>
   <p>{{#link-to 'shows'}}all shows{{/link-to}}</p>
+  {{log user}}
   {{outlet}}
 </script>
 
@@ -35,9 +36,10 @@
 </script>
 
 <script type="text/x-handlebars" data-template-name="externalShows/search">
-  {{input type="text" placeholder="Search shows by title" value=keyword action="search"}}
-  <button {{action "search" keyword}}>Search</button>
-  {{outlet}}
+    {{input type="text" placeholder="Search shows by title" value=keyword action="search"}}
+    <button {{action "search" keyword}}>Search</button>
+    {{outlet}}
+
 </script>
 
 <script type="text/x-handlebars" data-template-name="externalShows/search/results">

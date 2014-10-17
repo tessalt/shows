@@ -1,4 +1,6 @@
-var App = Ember.Application.create();
+var App = Ember.Application.create({
+  LOG_TRANSITIONS: true
+});
 
 App.ApplicationAdapter = DS.RESTAdapter.extend({
   pathForType: function(type) {
@@ -48,6 +50,15 @@ App.ShowsNewRoute = Ember.Route.extend({
 });
 
 App.ExternalShowsSearchRoute = Ember.Route.extend({
+  beforeModel: function() {
+    var self = this;
+    App.User.get().then(function (user){
+      if (!user) {
+        self.controllerFor('shows').set('errorMsg', 'Please login');
+        self.transitionTo('shows');
+      }
+    })
+  },
   actions: {
     search: function(keyword) {
       this.transitionTo('externalShows.search.results', keyword);
@@ -68,9 +79,7 @@ App.User = Ember.Object.extend();
 
 App.User.reopenClass({
   get: function() {
-    return $.getJSON('/me').then(function(data){
-      return data;
-    });
+    return $.getJSON('/me');
   }
 })
 

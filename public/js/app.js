@@ -46,6 +46,14 @@ App.ShowsNewRoute = Ember.Route.extend({
         episodes: data.external_episodes
       }
     });
+  },
+  afterModel: function(data) {
+    var self = this;
+    this.store.find('show', data.show.id).then(function (show){
+      if (show) {
+        self.transitionTo('show', show.id);
+      }
+    })
   }
 });
 

@@ -17,7 +17,7 @@
 <script type="text/x-handlebars" data-template-name="shows">
   {{errorMsg}}
   {{#each show in shows}}
-    {{#link-to 'show' id}} {{show.title}} {{/link-to}}
+    {{#link-to 'show' show.id}} {{show.title}} {{/link-to}}
     {{#if ../user.admin}}
     | <button {{action "deleteShow" show}}>{{show.id}}</button>
     {{/if}}
@@ -32,6 +32,11 @@
     </li>
   {{/each}}
   </ul>
+</script>
+
+<script type="text/x-handlebars" data-template-name="externalShows">
+  EXTERNAL shows
+  {{outlet}}
 </script>
 
 <script type="text/x-handlebars" data-template-name="externalShows/search">

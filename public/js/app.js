@@ -52,13 +52,16 @@ App.ExternalShowsSearchRoute = Ember.Route.extend({
     search: function(keyword) {
       this.transitionTo('externalShows.search.results', keyword);
     }
+  },
+  setupController: function(controller) {
+    controller.set('keyword', '');
   }
 });
 
 App.ExternalShowsSearchResultsRoute = Ember.Route.extend({
   model: function(params) {
     return this.store.find('externalShow', {query: params.keyword});
-  }
+  },
 });
 
 App.User = Ember.Object.extend();

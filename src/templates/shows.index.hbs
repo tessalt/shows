@@ -1,0 +1,9 @@
+{{errorMsg}}
+{{#each show in shows}}
+  <li>
+    {{#link-to 'shows.show' show.id}} {{show.title}} {{/link-to}}
+    {{#if ../user.admin}}
+      <button {{action "deleteShow" show}}>delete</button>
+    {{/if}}
+  </li>
+{{/each}}

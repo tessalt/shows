@@ -8,7 +8,10 @@ var Shows = function () {
 
   this.before(function(){
     if (!(this.session.get('userId'))) {
-      throw new geddy.errors.BadRequestError();
+      self.respond('You must be logged in', {
+        statusCode: 403,
+        format: 'txt'
+      });
     }
   }, {except: ['index', 'show']});
 

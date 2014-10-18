@@ -22,12 +22,15 @@ var Votes = function () {
         self.respond('you\'ve already voted', {
           statusCode: 400,
           format: 'txt'
-        })
+        });
       } else {
         params.vote.userId = userId;
         var vote = geddy.model.Vote.create(params.vote);
         if (!vote.isValid()) {
-          self.respondWith(vote);
+          self.respond('You must be logged in to vote', {
+            statusCode: 403,
+            format: 'txt'
+          })
         } else {
           vote.save(function(err, data) {
             if (err) {

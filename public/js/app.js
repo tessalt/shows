@@ -93,7 +93,13 @@ App.Episode = DS.Model.extend({
   name: DS.attr('string'),
   showId: DS.attr('number'),
   show: DS.belongsTo('show'),
-  votes: DS.hasMany('vote')
+  number: DS.attr('number'),
+  votes: DS.hasMany('vote'),
+  description: DS.attr('string'),
+  writer: DS.attr('string'),
+  director: DS.attr('string'),
+  airdate: DS.attr('date'),
+  stars: DS.attr('string')
 });
 
 App.Vote = DS.Model.extend({
@@ -169,7 +175,13 @@ App.ShowsNewController = Ember.ObjectController.extend({
           Ember.RSVP.all(self.model.episodes.map(function(rawEpisode){
             var episode = self.store.createRecord('episode', {
               name: rawEpisode.EpisodeName,
-              showId: self.model.show.id
+              showId: self.model.show.id,
+              number: rawEpisode.EpisodeNumber,
+              description: rawEpisode.Overview,
+              writer: rawEpisode.Writer,
+              director: rawEpisode.Director,
+              airdate: rawEpisode.FirstAired,
+              stars: rawEpisode.GuestStars
             });
             return episode.save();
           })).then(function(something){

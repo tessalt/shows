@@ -10,9 +10,10 @@ App.ApplicationAdapter = DS.RESTAdapter.extend({
 });
 
 App.Router.map(function() {
-  this.resource('shows', {path: '/'});
+  this.resource('shows', {path: '/'}, function() {
+    this.route('new', {path: 'new/:show_id'});
+  });
   this.resource('show', {path: 'shows/:show_id'});
-  this.resource('shows.new', {path: 'shows/new/:show_id'});
   this.resource('externalShows', {path: 'externalShows'});
   this.resource('externalShows.search', {path: 'externalShows/search'}, function() {
     this.route('results', {path: ':keyword'});

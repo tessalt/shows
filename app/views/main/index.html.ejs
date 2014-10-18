@@ -19,6 +19,10 @@ Loading...
 </script>
 
 <script type="text/x-handlebars" data-template-name="shows">
+{{outlet}}
+</script>
+
+<script type="text/x-handlebars" data-template-name="shows/index">
   {{errorMsg}}
   {{#each show in shows}}
     <li>
@@ -27,6 +31,16 @@ Loading...
         <button {{action "deleteShow" show}}>delete</button>
       {{/if}}
     </li>
+  {{/each}}
+</script>
+
+
+<script type="text/x-handlebars" data-template-name="shows/new">
+  {{errors}}
+  <button {{action "createShow" this}}>Create</button>
+  {{ext_show.SeriesName}}
+  {{#each episodes}}
+    <p>{{EpisodeName}}</p>
   {{/each}}
 </script>
 
@@ -56,13 +70,4 @@ Loading...
     No Results
   {{/each}}
   </ul>
-</script>
-
-<script type="text/x-handlebars" data-template-name="shows/new">
-  {{errors}}
-  <button {{action "createShow" this}}>Create</button>
-  {{ext_show.SeriesName}}
-  {{#each episodes}}
-    <p>{{EpisodeName}}</p>
-  {{/each}}
 </script>

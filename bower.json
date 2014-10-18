@@ -1,0 +1,23 @@
+{
+  "name": "shows",
+  "version": "0.0.0",
+  "homepage": "https://github.com/tessalt/shows",
+  "authors": [
+    "Tessa Thornton <tessathornton@gmail.com>"
+  ],
+  "moduleType": [
+    "node"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "app/bower_components",
+    "test",
+    "tests"
+  ],
+  "resolutions": {
+    "ember": "~1.7.0"
+  }
+}

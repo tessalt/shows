@@ -24,3 +24,8 @@ gulp.task('scripts', function() {
     .pipe(gulp.dest('public/js'))
     .pipe(notify({message: 'Scripts done'}));
 });
+
+gulp.task('watch', function() {
+  gulp.watch('src/js/**/*.js', ['scripts']);
+  gulp.watch('src/sass/**/*.scss', ['styles']);
+});

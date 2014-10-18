@@ -17,7 +17,6 @@ App.Router.map(function() {
   this.resource('externalShows.search', {path: 'externalShows/search'}, function() {
     this.route('results', {path: ':keyword'});
   });
-  this.resource('externalShow', {path: 'externalShows/:show_id'});
 });
 
 App.ShowsRoute = Ember.Route.extend({

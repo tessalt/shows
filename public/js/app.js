@@ -46,14 +46,6 @@ App.ShowsNewRoute = Ember.Route.extend({
         episodes: data.external_episodes
       }
     });
-  },
-  afterModel: function(data) {
-    var self = this;
-    this.store.find('show', data.show.id).then(function (show){
-      if (show) {
-        self.transitionTo('show', show.id);
-      }
-    })
   }
 });
 
@@ -157,6 +149,7 @@ App.ExternalShowsSearchController = Ember.Controller.extend({
 });
 
 App.ShowsNewController = Ember.ObjectController.extend({
+  errors: [],
   actions: {
     createShow: function() {
       var self = this;
@@ -180,7 +173,8 @@ App.ShowsNewController = Ember.ObjectController.extend({
             self.transitionToRoute('show', self.model.show.id);
           })
         }, function(error){
-          console.log(error);
+          var responseText = JSON.parse(error.responseText);
+          self.set('errors', responseText.errors);
         });
       }
     }

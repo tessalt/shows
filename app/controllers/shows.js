@@ -3,6 +3,7 @@ var passport = require('../helpers/passport')
   , requireAuth = passport.requireAuth;
 
 var Shows = function () {
+  this.canRespondTo(['json']);
   this.respondsWith = ['json'];
 
   this.before(function(){
@@ -44,7 +45,15 @@ var Shows = function () {
           });
         }
       } else {
-       self.output(403, {'Content-Type': 'application/json'}, 'This show has already been added');
+        var response = {
+          errors: [
+            'show already added'
+          ]
+        }
+        self.respond(response, {
+          format: 'json',
+          statusCode: 403
+        })
       }
     });
   };

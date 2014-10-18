@@ -36,10 +36,9 @@
 </script>
 
 <script type="text/x-handlebars" data-template-name="externalShows/search">
-    {{input type="text" placeholder="Search shows by title" value=keyword action="search"}}
-    <button {{action "search" keyword}}>Search</button>
-    {{outlet}}
-
+  {{input type="text" placeholder="Search shows by title" value=keyword action="search"}}
+  <button {{action "search" keyword}}>Search</button>
+  {{outlet}}
 </script>
 
 <script type="text/x-handlebars" data-template-name="externalShows/search/results">
@@ -53,8 +52,11 @@
 </script>
 
 <script type="text/x-handlebars" data-template-name="shows/new">
+  {{#each errors}}
+    {{this}}
+  {{/each}}
   <button {{action "createShow" this}}>Create</button>
-  {{show.SeriesName}}
+  {{ext_show.SeriesName}}
   {{#each episodes}}
     <p>{{EpisodeName}}</p>
   {{/each}}

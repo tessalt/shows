@@ -21,13 +21,17 @@ var ExternalShows = function () {
   this.show = function(req, resp, params) {
     var self = this;
     tvdb.getSeries(params.id).then(function(data){
-      console.log(data);
+      if (data.episodes instanceof Array) {
+        episodes = data.episodes;
+      } else {
+        episodes = [data.episodes];
+      }
       var response = {
         external_show: {
           id: data.id,
           SeriesName: data.name
         },
-        external_episodes: data.episodes
+        external_episodes: episodes
       }
       self.respond(response);
     });

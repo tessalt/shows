@@ -20,6 +20,12 @@ App.Router.map(function() {
   });
 });
 
+App.IndexRoute = Ember.Route.extend({
+  beforeModel: function() {
+    this.transitionTo('shows');
+  }
+});
+
 App.ShowsRoute = Ember.Route.extend({
   model: function() {
     return new Ember.RSVP.hash({

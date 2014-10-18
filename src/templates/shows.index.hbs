@@ -1,9 +1,11 @@
 {{errorMsg}}
+<ul class="list-group">
 {{#each show in shows}}
-  <li>
+  <li class="list-group-item">
     {{#link-to 'shows.show' show.id}} {{show.title}} {{/link-to}}
     {{#if ../user.admin}}
       <button {{action "deleteShow" show}}>delete</button>
     {{/if}}
   </li>
 {{/each}}
+</ul>

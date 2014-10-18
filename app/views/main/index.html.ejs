@@ -30,6 +30,7 @@
   {{show.title}}
   <ul>
   {{#each episodes itemController="episode"}}
+    {{errors}}
     <li>{{name}} <button {{action "vote" 1}}>Upvote</button> <button {{action "vote" -1}}>downvote</button> {{voteCount}} </li>
   {{/each}}
   </ul>
@@ -52,9 +53,7 @@
 </script>
 
 <script type="text/x-handlebars" data-template-name="shows/new">
-  {{#each errors}}
-    {{this}}
-  {{/each}}
+  {{errors}}
   <button {{action "createShow" this}}>Create</button>
   {{ext_show.SeriesName}}
   {{#each episodes}}

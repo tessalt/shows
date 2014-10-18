@@ -18,9 +18,11 @@ var Votes = function () {
     var self = this;
     var userId = this.session.get('userId');
     geddy.model.Vote.first({userId: userId, episodeId: params.vote.episodeId}, function(err, vote){
-      console.log(vote);
       if (vote) {
-        throw new geddy.errors.BadRequestError();
+        self.respond('you\'ve already voted', {
+          statusCode: 400,
+          format: 'txt'
+        })
       } else {
         params.vote.userId = userId;
         var vote = geddy.model.Vote.create(params.vote);

@@ -45,14 +45,9 @@ var Shows = function () {
           });
         }
       } else {
-        var response = {
-          errors: [
-            'show already added'
-          ]
-        }
-        self.respond(response, {
-          format: 'json',
-          statusCode: 403
+        self.respond('show already added', {
+          statusCode: 403,
+          format: 'txt'
         })
       }
     });

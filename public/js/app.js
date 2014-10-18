@@ -121,6 +121,7 @@ App.ShowsController = Ember.ObjectController.extend({
 });
 
 App.EpisodeController = Ember.ObjectController.extend({
+  errors: '',
   voteCount: function() {
     var votes = this.get('model.votes').content;
     var total = 0;
@@ -138,6 +139,8 @@ App.EpisodeController = Ember.ObjectController.extend({
       });
       vote.save().then(function(){
         vote.set('episode', self.model);
+      }, function(error){
+        self.set('errors', error.responseText);
       });
     }
   }
@@ -149,7 +152,7 @@ App.ExternalShowsSearchController = Ember.Controller.extend({
 });
 
 App.ShowsNewController = Ember.ObjectController.extend({
-  errors: [],
+  errors: '',
   actions: {
     createShow: function() {
       var self = this;
@@ -159,7 +162,7 @@ App.ShowsNewController = Ember.ObjectController.extend({
           id: this.model.show.id
         });
       } catch (error) {
-        console.log(error);
+        self.set('errors', error.responseText);
       }
       if (show) {
         show.save().then(function() {
@@ -173,8 +176,7 @@ App.ShowsNewController = Ember.ObjectController.extend({
             self.transitionToRoute('show', self.model.show.id);
           })
         }, function(error){
-          var responseText = JSON.parse(error.responseText);
-          self.set('errors', responseText.errors);
+          self.set('errors', error.responseText);
         });
       }
     }

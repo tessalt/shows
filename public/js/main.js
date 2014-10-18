@@ -73060,10 +73060,10 @@ App.ApplicationAdapter = DS.RESTAdapter.extend({
 });
 
 App.Router.map(function() {
-  this.resource('shows', {path: '/'}, function() {
+  this.resource('shows', {path: 'shows'}, function() {
     this.route('new', {path: 'new/:show_id'});
+    this.route('show', {path: ':show_id'});
   });
-  this.resource('show', {path: 'shows/:show_id'});
   this.resource('externalShows', {path: 'externalShows'});
   this.resource('externalShows.search', {path: 'externalShows/search'}, function() {
     this.route('results', {path: ':keyword'});
@@ -73079,7 +73079,7 @@ App.ShowsRoute = Ember.Route.extend({
   }
 });
 
-App.ShowRoute = Ember.Route.extend({
+App.ShowsShowRoute = Ember.Route.extend({
   model: function(params) {
     return {
       show: this.store.find('show', params.show_id),
@@ -73235,7 +73235,7 @@ App.ShowsNewController = Ember.ObjectController.extend({
             });
             return episode.save();
           })).then(function(something){
-            self.transitionToRoute('show', self.model.show.id);
+            self.transitionToRoute('shows.show', self.model.show.id);
           })
         }, function(error){
           self.set('errors', error.responseText);

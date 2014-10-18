@@ -26,7 +26,7 @@ Loading...
   {{errorMsg}}
   {{#each show in shows}}
     <li>
-      {{#link-to 'show' show.id}} {{show.title}} {{/link-to}}
+      {{#link-to 'shows.show' show.id}} {{show.title}} {{/link-to}}
       {{#if ../user.admin}}
         <button {{action "deleteShow" show}}>delete</button>
       {{/if}}
@@ -44,7 +44,7 @@ Loading...
   {{/each}}
 </script>
 
-<script type="text/x-handlebars" data-template-name="show">
+<script type="text/x-handlebars" data-template-name="shows/show">
   {{show.title}}
   <ul>
   {{#each episodes itemController="episode"}}

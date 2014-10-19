@@ -1,9 +1,7 @@
 {{errorMsg}}
-{{#each show in shows}}
+{{input type="text" placeholder="Search shows by title" value=keyword action="search"}}
+{{#each results}}
   <li>
-    {{#link-to 'shows.show' show.id}} {{show.title}} {{/link-to}}
-    {{#if ../user.admin}}
-      <button {{action "deleteShow" show}}>delete</button>
-    {{/if}}
+    {{#link-to 'shows.show' id}} {{title}} {{/link-to}}
   </li>
 {{/each}}

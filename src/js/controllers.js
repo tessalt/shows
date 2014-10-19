@@ -1,4 +1,4 @@
-App.ShowsIndexController = Ember.ObjectController.extend({
+App.ShowsIndexController = Ember.ArrayController.extend({
   errorMsg: '',
   actions: {
     deleteShow: function(show) {
@@ -8,7 +8,18 @@ App.ShowsIndexController = Ember.ObjectController.extend({
         self.set('errorMsg', error.responseText);
       });
     }
-  }
+  },
+  results: function() {
+    var keyword = this.get('keyword');
+    var shows = this.get('content');
+    if (keyword) {
+      return shows.filter(function(show){
+        return show.get('title').toLowerCase().indexOf(keyword.toLowerCase()) > -1;
+      })
+    } else {
+      return shows;
+    }
+  }.property('content', 'keyword')
 });
 
 App.EpisodeController = Ember.ObjectController.extend({

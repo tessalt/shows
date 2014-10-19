@@ -17,10 +17,7 @@ App.IndexRoute = Ember.Route.extend({
 
 App.ShowsRoute = Ember.Route.extend({
   model: function() {
-    return new Ember.RSVP.hash({
-      shows: this.store.find('show'),
-      user: App.User.get()
-    })
+    return this.store.find('show');
   }
 });
 

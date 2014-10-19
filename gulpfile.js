@@ -10,7 +10,7 @@ var gulp = require('gulp'),
   handlebars = require('gulp-handlebars');
 
 gulp.task('styles', function() {
-  return gulp.src(['bower_components/bootstrap/dist/css/bootstrap.css', 'src/sass/**/*.scss'])
+  return gulp.src(['src/sass/**/*.scss'])
     .pipe(sass({style: 'expanded'}))
     .pipe(concat('app.css'))
     .pipe(gulp.dest('public/css'))

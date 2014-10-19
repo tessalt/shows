@@ -58,7 +58,11 @@ var Main = function () {
   this.getUser = function (req, resp) {
     var self = this;
     geddy.model.User.first({id: this.session.get('userId')}, function (err, user) {
-      self.respond(user, {format: 'json'});
+      if (user) {
+        self.respond(user, {format: 'json'});
+      } else {
+        self.respond({user: {admin: false}}, {format: 'json'});
+      }
     });
   }
 

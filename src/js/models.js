@@ -2,7 +2,11 @@ App.User = Ember.Object.extend();
 
 App.User.reopenClass({
   get: function() {
-    return $.getJSON('/me');
+    return $.getJSON('/me').then(function(user){
+      return user;
+    }, function(){
+      return {};
+    });
   }
 })
 

@@ -22,6 +22,11 @@ App.ShowsIndexController = Ember.ArrayController.extend({
   }.property('content', 'keyword')
 });
 
+App.EpisodesController = Ember.ArrayController.extend({
+  sortProperties: ['number'],
+  sortAscending: true
+});
+
 App.EpisodeController = Ember.ObjectController.extend({
   errors: '',
   voteCount: function() {

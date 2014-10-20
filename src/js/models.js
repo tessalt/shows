@@ -13,7 +13,7 @@ App.User.reopenClass({
 App.Show = DS.Model.extend({
   title: DS.attr('string'),
   tvdbId: DS.attr('number'),
-  episodes: DS.hasMany('episode')
+  episodes: DS.hasMany('episode', {async: true})
 });
 
 App.Episode = DS.Model.extend({

@@ -1,7 +1,9 @@
 App.Router.map(function() {
   this.resource('shows', {path: 'shows'}, function() {
     this.route('new', {path: 'new/:show_id'});
-    this.route('show', {path: ':show_id'});
+    this.resource('show', {path: ':show_id'}, function() {
+      this.resource('episodes');
+    });
   });
   this.resource('externalShows', {path: 'externalShows'});
   this.resource('externalShows.search', {path: 'externalShows/search'}, function() {
@@ -21,12 +23,17 @@ App.ShowsRoute = Ember.Route.extend({
   }
 });
 
-App.ShowsShowRoute = Ember.Route.extend({
+App.ShowRoute = Ember.Route.extend({
   model: function(params) {
-    return {
-      show: this.store.find('show', params.show_id),
-      episodes: this.store.find('episode', {showId: params.show_id})
-    }
+    return this.store.find('show', params.show_id);
+  }
+});
+
+App.EpisodesRoute = Ember.Route.extend({
+  model: function(params) {
+    console.log(this.modelFor('show'));
+    // return this.modelFor('show').get('episodes');
+    return this.store.find('episode', {showId: this.modelFor('show').id})
   }
 });
 

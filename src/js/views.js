@@ -10,8 +10,12 @@ App.ShowsNewView = Ember.View.extend({
   template: Ember.TEMPLATES.shows.new
 });
 
-App.ShowsShowView = Ember.View.extend({
-  template: Ember.TEMPLATES.shows.show
+App.ShowView = Ember.View.extend({
+  template: Ember.TEMPLATES.show
+});
+
+App.EpisodesView = Ember.View.extend({
+  template: Ember.TEMPLATES.episodes
 });
 
 App.ExternalShowsSearchView = Ember.View.extend({

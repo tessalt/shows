@@ -3,5 +3,6 @@
 {{#each results}}
   <li>
     {{#link-to 'episodes' id}} {{title}} {{/link-to}}
+    <button {{action "deleteShow" this}}>delete</button>
   </li>
 {{/each}}

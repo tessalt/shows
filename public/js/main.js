@@ -73110,6 +73110,10 @@ function program1(depth0,data) {
   data.buffer.push("</p>\n    <strong>");
   hashTypes = {};
   hashContexts = {};
+  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "season", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push(" / ");
+  hashTypes = {};
+  hashContexts = {};
   data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "number", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
   data.buffer.push("</strong>\n  </li>\n");
   return buffer;
@@ -73248,7 +73252,11 @@ function program1(depth0,data) {
   options = {hash:{},inverse:self.noop,fn:self.program(2, program2, data),contexts:[depth0,depth0],types:["STRING","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
   stack2 = ((stack1 = helpers['link-to'] || (depth0 && depth0['link-to'])),stack1 ? stack1.call(depth0, "episodes", "id", options) : helperMissing.call(depth0, "link-to", "episodes", "id", options));
   if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
-  data.buffer.push("\n  </li>\n");
+  data.buffer.push("\n    <button ");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "deleteShow", "", {hash:{},contexts:[depth0,depth0],types:["STRING","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push(">delete</button>\n  </li>\n");
   return buffer;
   }
 function program2(depth0,data) {
@@ -73364,8 +73372,6 @@ App.ShowRoute = Ember.Route.extend({
 
 App.EpisodesRoute = Ember.Route.extend({
   model: function(params) {
-    console.log(this.modelFor('show'));
-    // return this.modelFor('show').get('episodes');
     return this.store.find('episode', {showId: this.modelFor('show').id})
   }
 });
@@ -73434,6 +73440,7 @@ App.Episode = DS.Model.extend({
   writer: DS.attr('string'),
   director: DS.attr('string'),
   airdate: DS.attr('date'),
+  season: DS.attr('number'),
   stars: DS.attr('string')
 });
 
@@ -73503,7 +73510,7 @@ App.ShowsIndexController = Ember.ArrayController.extend({
 });
 
 App.EpisodesController = Ember.ArrayController.extend({
-  sortProperties: ['number'],
+  sortProperties: ['season', 'number'],
   sortAscending: true
 });
 
@@ -73562,11 +73569,12 @@ App.ShowsNewController = Ember.ObjectController.extend({
               writer: rawEpisode.Writer,
               director: rawEpisode.Director,
               airdate: rawEpisode.FirstAired,
+              season: rawEpisode.SeasonNumber,
               stars: rawEpisode.GuestStars
             });
             return episode.save();
           })).then(function(something){
-            self.transitionToRoute('shows.show', self.model.show.id);
+            self.transitionToRoute('episodes', self.model.show.id);
           })
         }, function(error){
           self.set('errors', error.responseText);

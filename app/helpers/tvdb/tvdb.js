@@ -55,6 +55,7 @@ Tvdb.prototype.getSeries = function(seriesId) {
       emptyTag: null
     }, function(error, result){
       if (result) {
+        console.log(result.Data.Episode);
         deferred.resolve({
           id: result.Data.Series.id,
           name: result.Data.Series.SeriesName,

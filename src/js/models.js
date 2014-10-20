@@ -26,6 +26,7 @@ App.Episode = DS.Model.extend({
   writer: DS.attr('string'),
   director: DS.attr('string'),
   airdate: DS.attr('date'),
+  season: DS.attr('number'),
   stars: DS.attr('string')
 });
 

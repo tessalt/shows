@@ -31,8 +31,6 @@ App.ShowRoute = Ember.Route.extend({
 
 App.EpisodesRoute = Ember.Route.extend({
   model: function(params) {
-    console.log(this.modelFor('show'));
-    // return this.modelFor('show').get('episodes');
     return this.store.find('episode', {showId: this.modelFor('show').id})
   }
 });

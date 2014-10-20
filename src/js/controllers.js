@@ -23,7 +23,7 @@ App.ShowsIndexController = Ember.ArrayController.extend({
 });
 
 App.EpisodesController = Ember.ArrayController.extend({
-  sortProperties: ['number'],
+  sortProperties: ['season', 'number'],
   sortAscending: true
 });
 
@@ -82,11 +82,12 @@ App.ShowsNewController = Ember.ObjectController.extend({
               writer: rawEpisode.Writer,
               director: rawEpisode.Director,
               airdate: rawEpisode.FirstAired,
+              season: rawEpisode.SeasonNumber,
               stars: rawEpisode.GuestStars
             });
             return episode.save();
           })).then(function(something){
-            self.transitionToRoute('shows.show', self.model.show.id);
+            self.transitionToRoute('episodes', self.model.show.id);
           })
         }, function(error){
           self.set('errors', error.responseText);

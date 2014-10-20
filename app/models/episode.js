@@ -4,7 +4,11 @@ var Episode = function () {
     name: {type: 'string', required: true},
     number: {type: 'number'},
     season: {type: 'number'},
-    description: {type: 'text'}
+    description: {type: 'text'},
+    writer: {type: 'string'},
+    director: {type: 'string'},
+    airdate: {type: 'string'},
+    stars: {type: 'string'}
   });
 
   this.belongsTo('Show');

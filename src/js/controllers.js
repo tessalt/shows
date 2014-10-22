@@ -74,7 +74,9 @@ App.EpisodeController = Ember.ObjectController.extend({
 });
 
 App.SeasonController = Ember.ObjectController.extend({
-  isOpen: false,
+  isOpen: function() {
+    return this.get('number') === 1;
+  }.property('number'),
   actions: {
     toggleSeason: function() {
       this.set('isOpen', !this.get('isOpen'));

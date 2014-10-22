@@ -1,12 +1,11 @@
 {{#each episodesBySeason itemController="season"}}
   <div {{action "toggleSeason" on="click"}}>
     <h3>Season {{number}}</h3>
-    <div class="season" {{bind-attr class="isOpen:open"}}>
+    <div {{bind-attr class=":season isOpen:open"}}>
       {{#each episodes itemController="episode"}}
         {{errors}}
-       <li>{{name}} <button {{action "vote" 1}}>Upvote</button> <button {{action "vote" -1}}>downvote</button> {{voteCount}}
+       <li>{{name}} | <strong>episode {{number}}</strong> <button {{action "vote" 1}}>Upvote</button> <button {{action "vote" -1}}>downvote</button> {{voteCount}}
          <p>{{description}}</p>
-         <strong>{{season}} / {{number}}</strong>
        </li>
       {{/each}}
     </div>

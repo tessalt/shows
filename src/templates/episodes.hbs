@@ -1,7 +1,13 @@
-{{#each itemController="episode"}}
-  {{errors}}
-  <li>{{name}} <button {{action "vote" 1}}>Upvote</button> <button {{action "vote" -1}}>downvote</button> {{voteCount}}
-    <p>{{description}}</p>
-    <strong>{{season}} / {{number}}</strong>
-  </li>
+{{#each episodesBySeason}}
+  <div>
+    <h3>Season {{number}}</h3>
+    {{#each episodes itemController="episode"}}
+      {{errors}}
+     <li>{{name}} <button {{action "vote" 1}}>Upvote</button> <button {{action "vote" -1}}>downvote</button> {{voteCount}}
+       <p>{{description}}</p>
+       <strong>{{season}} / {{number}}</strong>
+     </li>
+    {{/each}}
+
+  </div>
 {{/each}}

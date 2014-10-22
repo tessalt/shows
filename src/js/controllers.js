@@ -1,4 +1,5 @@
 App.ShowsIndexController = Ember.ArrayController.extend({
+  user: '',
   errorMsg: '',
   actions: {
     deleteShow: function(show) {
@@ -23,8 +24,33 @@ App.ShowsIndexController = Ember.ArrayController.extend({
 });
 
 App.EpisodesController = Ember.ArrayController.extend({
-  sortProperties: ['season', 'number'],
-  sortAscending: true
+  seasonCount: function () {
+    var episodes = this.get('content');
+    return Math.max.apply(Math, episodes.map(function(episode){
+      return episode.get('season');
+    }));
+  }.property('content'),
+  episodesBySeason: function() {
+    var episodes = this.get('content');
+    var seasons = [];
+    var max = Math.max.apply(Math, episodes.map(function(episode){
+      return episode.get('season');
+    }));
+    for (var i = 0; i <= max; i++) {
+      var epsForSeason = episodes.filter(function(episode){
+        return episode.get('season') === i;
+      }).sort(function(a, b){
+        return a.get('number') - b.get('number');
+      });
+      if (epsForSeason.length) {
+        seasons.push({
+          number: i,
+          episodes: epsForSeason
+        });
+      }
+    }
+    return seasons;
+  }.property('content')
 });
 
 App.EpisodeController = Ember.ObjectController.extend({

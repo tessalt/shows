@@ -46,7 +46,10 @@ a {
   }
 }
 
-.app-header-user {
+.app-header-nav {
   list-style: none;
   float: right;
+  li {
+    display: inline-block;
+  }
 }

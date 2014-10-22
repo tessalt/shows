@@ -11,6 +11,14 @@ App.Router.map(function() {
   });
 });
 
+App.ApplicationRoute = Ember.Route.extend({
+  setupController: function(controller) {
+    App.User.get().then(function(user){
+      controller.set('user', user);
+    });
+  }
+});
+
 App.IndexRoute = Ember.Route.extend({
   beforeModel: function() {
     this.transitionTo('shows');

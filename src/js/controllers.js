@@ -24,12 +24,6 @@ App.ShowsIndexController = Ember.ArrayController.extend({
 });
 
 App.EpisodesController = Ember.ArrayController.extend({
-  seasonCount: function () {
-    var episodes = this.get('content');
-    return Math.max.apply(Math, episodes.map(function(episode){
-      return episode.get('season');
-    }));
-  }.property('content'),
   episodesBySeason: function() {
     var episodes = this.get('content');
     var seasons = [];
@@ -75,6 +69,15 @@ App.EpisodeController = Ember.ObjectController.extend({
       }, function(error){
         self.set('errors', error.responseText);
       });
+    }
+  }
+});
+
+App.SeasonController = Ember.ObjectController.extend({
+  isOpen: false,
+  actions: {
+    toggleSeason: function() {
+      this.set('isOpen', !this.get('isOpen'));
     }
   }
 });

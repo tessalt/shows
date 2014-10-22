@@ -41,3 +41,8 @@ a {
   float: right; }
   .app-header-nav li {
     display: inline-block; }
+
+.season {
+  display: none; }
+  .season.open {
+    display: block; }

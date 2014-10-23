@@ -1,3 +1,9 @@
+html {
+  box-sizing: border-box; }
+
+*, *:before, *:after {
+  box-sizing: inherit; }
+
 body {
   font-family: 'Source Sans Pro', sans-serif;
   margin: 0;
@@ -8,8 +14,23 @@ h1, h2, h3, h4, h5, h6, ul, ol, p {
   margin-top: 0;
   font-weight: 400; }
 
+ul, ol {
+  padding-left: 0;
+  list-style: none; }
+
 a {
   color: #444; }
+
+input {
+  font-family: inherit;
+  font-size: inherit; }
+
+.cf:before, .cf:after {
+  content: " ";
+  display: table; }
+
+.cf:after {
+  clear: both; }
 
 .btn {
   display: inline-block;
@@ -19,17 +40,25 @@ a {
   font-weight: 400;
   text-decoration: none; }
 
+.search {
+  padding: 8px 12px;
+  border: 2px solid #BFC4CA;
+  border-radius: 3px; }
+
 @media (min-width: 1074px) {
   .container {
     margin: 0 auto;
     max-width: 800px; } }
 
 .app-header {
-  background: rgba(44, 62, 80, 0.3);
+  background: #BFC4CA;
   overflow: hidden;
-  padding: 16px 0; }
+  padding: 16px; }
   .app-header h1, .app-header ul {
     margin-bottom: 0; }
+  @media (min-width: 1074px) {
+    .app-header {
+      padding: 16px 0; } }
 
 .app-header-title {
   float: left; }
@@ -37,11 +66,37 @@ a {
     text-decoration: none; }
 
 .app-header-nav {
-  list-style: none;
   float: right; }
   .app-header-nav li {
     display: inline-block; }
 
+/* body */
+.app-container {
+  padding-top: 16px; }
+
+/* list view */
+.list-view li {
+  overflow: hidden;
+  border-bottom: 1px solid rgba(191, 196, 202, 0.4); }
+.list-view a {
+  padding: 8px;
+  text-decoration: none;
+  display: block; }
+@media (min-width: 1074px) {
+  .list-view a {
+    padding: 8px 0; }
+ }
+
+/* shows view */
+.shows-search {
+  width: calc(100% - 32px);
+  margin: 0 16px 8px 16px; }
+  @media (min-width: 1074px) {
+    .shows-search {
+      margin: 0 0 8px 0;
+      width: 100%; } }
+
+/* episodes view */
 .season {
   display: none; }
   .season.open {

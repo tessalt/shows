@@ -1,8 +1,10 @@
 {{errorMsg}}
-{{input type="text" placeholder="Search shows by title" value=keyword action="search"}}
+{{input class="search shows-search" type="text" placeholder="Search shows by title" value=keyword action="search"}}
+<ul class="list-view shows-list">
 {{#each results}}
   <li>
     {{#link-to 'episodes' id}} {{title}} {{/link-to}}
-    <button {{action "deleteShow" this}}>delete</button>
+    {{!-- <button {{action "deleteShow" this}}>delete</button> --}}
   </li>
 {{/each}}
+</ul>

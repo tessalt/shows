@@ -2,11 +2,11 @@
   <div class="container cf">
     <h1 class="app-header-title"><a href="/#/shows">JudgeTV</a></h1>
     <ul class="app-header-nav">
-      <li><a class="btn" href="/#externalShows/search">New Show</a></li>
+      <li><a class="btn btn-white" href="/#externalShows/search">New Show</a></li>
       <% if (user) { %>
-        <li><%- linkTo('Log out', logoutPath, {class: 'btn'}) %></li>
+        <li><%- linkTo('Log out', logoutPath, {class: 'btn btn-white'}) %></li>
       <% } else { %>
-        <li><%- linkTo('log in with Facebook or Twitter', loginPath, {class: 'btn'}) %></li>
+        <li><%- linkTo('log in with Facebook or Twitter', loginPath, {class: 'btn btn-white'}) %></li>
       <% } %>
     </ul>
   </div>

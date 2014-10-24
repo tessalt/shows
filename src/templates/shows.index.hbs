@@ -1,10 +1,16 @@
-{{errorMsg}}
-{{input class="search shows-search" type="text" placeholder="Search shows by title" value=keyword action="search"}}
-<ul class="list-view shows-list">
-{{#each results}}
-  <li>
-    {{#link-to 'episodes' id}} {{title}} {{/link-to}}
-    {{!-- <button {{action "deleteShow" this}}>delete</button> --}}
-  </li>
-{{/each}}
-</ul>
+<div class="shows-search">
+  <div class="container">
+    {{input class="search shows-search-field" type="text" placeholder="Search shows by title" value=keyword action="search"}}
+  </div>
+</div>
+<div class="container app-container">
+  {{errorMsg}}
+  <ul class="list-view shows-list">
+  {{#each results}}
+    <li>
+      {{#link-to 'episodes' id}} {{title}} {{/link-to}}
+      {{!-- <button {{action "deleteShow" this}}>delete</button> --}}
+    </li>
+  {{/each}}
+  </ul>
+</div>

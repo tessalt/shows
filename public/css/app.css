@@ -5,14 +5,18 @@ html {
   box-sizing: inherit; }
 
 body {
-  font-family: 'Source Sans Pro', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   margin: 0;
   padding: 0;
-  color: #444; }
+  color: #444;
+  background: #e0e0e0; }
 
 h1, h2, h3, h4, h5, h6, ul, ol, p {
-  margin-top: 0;
-  font-weight: 400; }
+  font-weight: 400;
+  margin-top: 0; }
+
+ul, ol, p {
+  font-weight: 300; }
 
 ul, ol {
   padding-left: 0;
@@ -23,7 +27,10 @@ a {
 
 input {
   font-family: inherit;
-  font-size: inherit; }
+  font-size: inherit;
+  font-weight: 300; }
+  input:focus {
+    outline: none; }
 
 .cf:before, .cf:after {
   content: " ";
@@ -35,15 +42,17 @@ input {
 .btn {
   display: inline-block;
   padding: 8px 12px;
-  border: 1px solid #444;
-  border-radius: 20px;
-  font-weight: 400;
+  border: 2px solid white;
+  border-radius: 3px;
   text-decoration: none; }
+
+.btn-white {
+  border: 2px solid white;
+  color: white; }
 
 .search {
   padding: 8px 12px;
-  border: 2px solid #BFC4CA;
-  border-radius: 3px; }
+  border: 0; }
 
 @media (min-width: 1074px) {
   .container {
@@ -51,14 +60,15 @@ input {
     max-width: 800px; } }
 
 .app-header {
-  background: #BFC4CA;
-  overflow: hidden;
-  padding: 16px; }
+  background: #673ab7;
+  overflow: hidden; }
   .app-header h1, .app-header ul {
     margin-bottom: 0; }
-  @media (min-width: 1074px) {
-    .app-header {
-      padding: 16px 0; } }
+  .app-header h1 a {
+    color: white; }
+  .app-header .container {
+    padding: 16px;
+    background: rgba(0, 0, 0, 0.15); }
 
 .app-header-title {
   float: left; }
@@ -68,33 +78,34 @@ input {
 .app-header-nav {
   float: right; }
   .app-header-nav li {
-    display: inline-block; }
+    display: inline-block;
+    margin-left: 10px; }
 
 /* body */
 .app-container {
-  padding-top: 16px; }
+  padding-top: 16px;
+  background: white; }
 
 /* list view */
-.list-view li {
-  overflow: hidden;
-  border-bottom: 1px solid rgba(191, 196, 202, 0.4); }
-.list-view a {
-  padding: 8px;
-  text-decoration: none;
-  display: block; }
-@media (min-width: 1074px) {
+.list-view {
+  border-radius: 4px; }
+  .list-view li {
+    overflow: hidden;
+    border-bottom: 1px solid rgba(191, 196, 202, 0.4); }
+    .list-view li:last-of-type {
+      border-bottom: 0; }
   .list-view a {
-    padding: 8px 0; }
- }
+    padding: 16px;
+    text-decoration: none;
+    display: block;
+    font-size: 20px; }
 
 /* shows view */
-.shows-search {
-  width: calc(100% - 32px);
-  margin: 0 16px 8px 16px; }
-  @media (min-width: 1074px) {
-    .shows-search {
-      margin: 0 0 8px 0;
-      width: 100%; } }
+.shows-search-field {
+  background: #f5f5f5;
+  padding: 16px;
+  width: 100%;
+  font-size: 20px; }
 
 /* episodes view */
 .season {

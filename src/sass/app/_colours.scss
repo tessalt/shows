@@ -1,6 +1,6 @@
 body {
   color: #444;
-  background: #e0e0e0;
+  background: #f5f5f5;
 }
 
 .btn {
@@ -13,7 +13,7 @@ body {
 }
 
 .app-header {
-  @include linear-gradient(90deg, #24C6DC 10%, #514A9D 90%);
+  @include linear-gradient(90deg, #4776E6 10%, #8E54E9 90%);
   .container {
     background: rgba(0,0,0,0.15);
   }
@@ -24,4 +24,15 @@ body {
 
 .app-container {
   background: white;
+}
+
+.shows-search {
+  .container {
+    background: white;
+  }
+}
+
+.shows-search-field {
+  border: 0;
+  border-bottom: 2px solid #8E54E9;
 }

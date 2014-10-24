@@ -1,0 +1,27 @@
+body {
+  color: #444;
+  background: #e0e0e0;
+}
+
+.btn {
+  border: 2px solid white;
+}
+
+.btn-white {
+  border: 2px solid white;
+  color: white;
+}
+
+.app-header {
+  @include linear-gradient(90deg, #24C6DC 10%, #514A9D 90%);
+  .container {
+    background: rgba(0,0,0,0.15);
+  }
+  h1 a {
+    color: white;
+  }
+}
+
+.app-container {
+  background: white;
+}

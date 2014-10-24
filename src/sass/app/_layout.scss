@@ -1,0 +1,10 @@
+.container {
+  @media (min-width: 1074px) {
+    margin: 0 auto;
+    max-width: 800px;
+  }
+}
+
+.app-container {
+  padding-top: 16px;
+}

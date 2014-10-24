@@ -1,3 +1,7 @@
+/* Bourbon 4.0.2
+ * http://bourbon.io
+ * Copyright 2011-2014 thoughtbot, inc.
+ * MIT License */
 html {
   box-sizing: border-box; }
 
@@ -7,9 +11,7 @@ html {
 body {
   font-family: 'Open Sans', sans-serif;
   margin: 0;
-  padding: 0;
-  color: #444;
-  background: #e0e0e0; }
+  padding: 0; }
 
 h1, h2, h3, h4, h5, h6, ul, ol, p {
   font-weight: 400;
@@ -39,36 +41,53 @@ input {
 .cf:after {
   clear: both; }
 
-.btn {
-  display: inline-block;
-  padding: 8px 12px;
-  border: 2px solid white;
-  border-radius: 3px;
-  text-decoration: none; }
-
-.btn-white {
-  border: 2px solid white;
-  color: white; }
-
-.search {
-  padding: 8px 12px;
-  border: 0; }
-
 @media (min-width: 1074px) {
   .container {
     margin: 0 auto;
     max-width: 800px; } }
 
+.app-container {
+  padding-top: 16px; }
+
+body {
+  color: #444;
+  background: #e0e0e0; }
+
+.btn {
+  border: 2px solid white; }
+
+.btn-white {
+  border: 2px solid white;
+  color: white; }
+
 .app-header {
-  background: #673ab7;
+  background-color: #24C6DC;
+  background-image: -webkit-linear-gradient(-360deg, #24C6DC 10%, #514A9D 90%);
+  background-image: linear-gradient(90deg,#24C6DC 10%, #514A9D 90%); }
+  .app-header .container {
+    background: rgba(0, 0, 0, 0.15); }
+  .app-header h1 a {
+    color: white; }
+
+.app-container {
+  background: white; }
+
+.btn {
+  display: inline-block;
+  padding: 8px 12px;
+  border-radius: 3px;
+  text-decoration: none; }
+
+.search {
+  padding: 8px 12px;
+  border: 0; }
+
+.app-header {
   overflow: hidden; }
   .app-header h1, .app-header ul {
     margin-bottom: 0; }
-  .app-header h1 a {
-    color: white; }
   .app-header .container {
-    padding: 16px;
-    background: rgba(0, 0, 0, 0.15); }
+    padding: 16px; }
 
 .app-header-title {
   float: left; }
@@ -81,12 +100,6 @@ input {
     display: inline-block;
     margin-left: 10px; }
 
-/* body */
-.app-container {
-  padding-top: 16px;
-  background: white; }
-
-/* list view */
 .list-view {
   border-radius: 4px; }
   .list-view li {
@@ -100,14 +113,12 @@ input {
     display: block;
     font-size: 20px; }
 
-/* shows view */
 .shows-search-field {
   background: #f5f5f5;
   padding: 16px;
   width: 100%;
   font-size: 20px; }
 
-/* episodes view */
 .season {
   display: none; }
   .season.open {

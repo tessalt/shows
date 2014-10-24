@@ -1,0 +1,16 @@
+.list-view {
+  border-radius: 4px;
+  li {
+    overflow: hidden;
+    border-bottom: 1px solid rgba(#BFC4CA, 0.4);
+    &:last-of-type {
+      border-bottom: 0;
+    }
+  }
+  a {
+    padding: 16px;
+    text-decoration: none;
+    display: block;
+    font-size: 20px;
+  }
+}

@@ -1,0 +1,6 @@
+.season {
+  display: none;
+  &.open {
+    display: block;
+  }
+}

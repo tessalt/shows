@@ -1,0 +1,39 @@
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6, ul, ol, p {
+  font-weight: 400;
+  margin-top: 0;
+}
+
+ul, ol, p {
+  font-weight: 300;
+}
+
+ul, ol {
+  padding-left: 0;
+  list-style: none;
+}
+
+a {
+  color: #444;
+}
+
+input {
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: 300;
+  &:focus {
+    outline: none;
+  }
+}

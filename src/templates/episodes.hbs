@@ -1,11 +1,24 @@
 {{#each episodesBySeason itemController="season"}}
-  <div {{action "toggleSeason" on="click"}}>
-    <h3>Season {{number}}</h3>
-    <div {{bind-attr class=":season isOpen:open"}}>
+  <div class="season">
+    <h3 {{action "toggleSeason" on="click"}}>Season {{number}}</h3>
+    <div {{bind-attr class=":season-episodes isOpen:open"}}>
       {{#each episodes itemController="episode"}}
         {{errors}}
-       <li>{{name}} | <strong>episode {{number}}</strong> <button {{action "vote" 1}}>Upvote</button> <button {{action "vote" -1}}>downvote</button> {{voteCount}}
-         <p>{{description}}</p>
+       <li class="episode">
+        <header class="episode-header">
+          <div class="episode-header-info">
+            <h4>{{name}}</h4>
+            <p>Episode {{number}}</p>
+          </div>
+          <div class="episode-header-votes">
+            <span class="episode-vote-count">{{voteCount}}</span>
+            <span class="episode-vote-buttons">
+              <button class="upvote" {{action "vote" 1}}>Upvote</button>
+              <button class="downvote" {{action "vote" -1}}>downvote</button>
+            </span>
+          </div>
+        </header>
+         <p class="episode-desc">{{description}}</p>
        </li>
       {{/each}}
     </div>

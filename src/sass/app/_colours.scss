@@ -36,3 +36,45 @@ body {
   border: 0;
   border-bottom: 2px solid #8E54E9;
 }
+
+.show {
+  h2 {
+    border-bottom: 2px solid #8E54E9;
+  }
+}
+
+.season {
+  h3 {
+    background: #fbfbfb;
+  }
+}
+
+.episode {
+  h4 {
+    color: #465ec3;
+  }
+}
+
+.episode-vote-buttons {
+  button {
+    background: white;
+    border: 2px solid;
+  }
+  .upvote {
+    border-color: #8E54E9;
+    &:after {
+      border-color: transparent transparent #8E54E9 transparent;
+    }
+  }
+  .downvote {
+    border-color: #465ec3;
+    &:after {
+      border-color: #465ec3 transparent transparent transparent ;
+    }
+  }
+}
+
+.episode-vote-count {
+  background: #465ec3;
+  color: white;
+}

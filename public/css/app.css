@@ -46,6 +46,9 @@ input {
     margin: 0 auto;
     max-width: 800px; } }
 
+.app-container-inner {
+  padding: 16px; }
+
 .btn {
   display: inline-block;
   padding: 8px 12px;
@@ -81,6 +84,31 @@ body {
 .shows-search-field {
   border: 0;
   border-bottom: 2px solid #8E54E9; }
+
+.show h2 {
+  border-bottom: 2px solid #8E54E9; }
+
+.season h3 {
+  background: #fbfbfb; }
+
+.episode h4 {
+  color: #465ec3; }
+
+.episode-vote-buttons button {
+  background: white;
+  border: 2px solid; }
+.episode-vote-buttons .upvote {
+  border-color: #8E54E9; }
+  .episode-vote-buttons .upvote:after {
+    border-color: transparent transparent #8E54E9 transparent; }
+.episode-vote-buttons .downvote {
+  border-color: #465ec3; }
+  .episode-vote-buttons .downvote:after {
+    border-color: #465ec3 transparent transparent transparent; }
+
+.episode-vote-count {
+  background: #465ec3;
+  color: white; }
 
 .app-header {
   overflow: hidden; }
@@ -121,7 +149,82 @@ body {
   font-size: 20px;
   padding: 16px 0; }
 
-.season {
-  display: none; }
-  .season.open {
+.show h2 {
+  padding-bottom: 16px; }
+
+.season h3 {
+  padding: 16px;
+  line-height: 1;
+  cursor: pointer; }
+
+.season-episodes {
+  display: none;
+  padding: 0 16px; }
+  .season-episodes.open {
     display: block; }
+
+.episode {
+  border-bottom: 1px solid rgba(191, 196, 202, 0.4);
+  margin-bottom: 16px; }
+  .episode h4 {
+    font-size: 16px;
+    margin-bottom: 8px;
+    line-height: 1; }
+
+.episode-header {
+  overflow: hidden;
+  margin-bottom: 8px; }
+
+.episode-header-info {
+  float: left; }
+  .episode-header-info p {
+    color: #252525;
+    font-size: 12px;
+    margin-bottom: 0; }
+
+.episode-header-votes {
+  float: right; }
+
+.episode-vote-buttons {
+  float: right;
+  display: block; }
+  .episode-vote-buttons button {
+    display: block;
+    width: 100%;
+    border-radius: 3px;
+    position: relative;
+    text-indent: -9999px;
+    padding: 1px 10px; }
+    .episode-vote-buttons button:after {
+      content: "";
+      width: 0;
+      height: 0;
+      border-style: solid;
+      right: 4px;
+      top: 4px;
+      position: absolute; }
+  .episode-vote-buttons .upvote {
+    border-bottom-width: 1px;
+    border-radius: 3px 3px 0 0; }
+    .episode-vote-buttons .upvote:after {
+      border-width: 0 6px 6px 6px; }
+  .episode-vote-buttons .downvote {
+    border-top-width: 1px;
+    border-radius: 0 0 3px 3px; }
+    .episode-vote-buttons .downvote:after {
+      border-width: 6px 6px 0 6px;
+      top: 5px; }
+
+.episode-vote-count {
+  float: right;
+  padding: 6px 12px;
+  border-radius: 3px;
+  margin-left: 8px;
+  font-size: 18px;
+  font-weight: 700; }
+
+.episode-desc {
+  font-size: 14px;
+  line-height: 20px;
+  color: rgba(0, 0, 0, 0.5);
+  font-weight: 400; }

@@ -1,3 +1,8 @@
-  {{input type="text" placeholder="Search shows by title" value=keyword action="search"}}
-  <button {{action "search" keyword}}>Search</button>
+<div class="shows-search">
+  <div class="container">
+    {{input class="search shows-search-field" type="text" placeholder="Search the tvdb database for shows by title" value=keyword action="search"}}
+  </div>
+</div>
+<div class="container app-container">
   {{outlet}}
+</div>

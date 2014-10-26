@@ -1,6 +1,14 @@
-  {{errors}}
-  <button {{action "createShow" this}}>Create</button>
-  {{ext_show.SeriesName}}
-  {{#each episodes}}
-    <p>{{EpisodeName}}</p>
-  {{/each}}
+{{#if loading}}loading...{{/if}}
+<div class="container app-container">
+  <div class="app-container-inner show">
+    <h2>{{show.SeriesName}}</h2>
+    {{errors}}
+    <div class="cta">
+      <button class="btn btn-dark btn-block" {{action "createShow" this}}>Add Show</button>
+    </div>
+    <h3>Episodes</h3>
+    {{#each episodes}}
+      <p>{{EpisodeName}}</p>
+    {{/each}}
+  </div>
+</div>

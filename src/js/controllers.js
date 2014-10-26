@@ -91,8 +91,10 @@ App.ExternalShowsSearchController = Ember.Controller.extend({
 
 App.ShowsNewController = Ember.ObjectController.extend({
   errors: '',
+  loading: false,
   actions: {
     createShow: function() {
+      this.set('loading', true);
       var self = this;
       try {
         var show = this.store.createRecord('show', {
@@ -118,6 +120,7 @@ App.ShowsNewController = Ember.ObjectController.extend({
             });
             return episode.save();
           })).then(function(something){
+            self.set('loading', false);
             self.transitionToRoute('episodes', self.model.show.id);
           })
         }, function(error){

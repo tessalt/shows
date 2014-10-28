@@ -157,23 +157,31 @@ body {
 
 @-webkit-keyframes progress {
   from {
-    transform: scaleX(0); }
+    -webkit-transform: scaleX(0); }
 
   to {
-    transform: scaleX(2); } }
+    -webkit-transform: scaleX(2); } }
 
 @-moz-keyframes progress {
   from {
-    transform: scaleX(0); }
+    -moz-transform: scaleX(0); }
 
   to {
-    transform: scaleX(2); } }
+    -moz-transform: scaleX(2); } }
 
 @keyframes progress {
   from {
+    -webkit-transform: scaleX(0);
+    -moz-transform: scaleX(0);
+    -ms-transform: scaleX(0);
+    -o-transform: scaleX(0);
     transform: scaleX(0); }
 
   to {
+    -webkit-transform: scaleX(2);
+    -moz-transform: scaleX(2);
+    -ms-transform: scaleX(2);
+    -o-transform: scaleX(2);
     transform: scaleX(2); } }
 
 .loading {
@@ -182,14 +190,22 @@ body {
   width: 100%;
   text-indent: -9999px; }
   .loading:after {
-    transform: scaleX(0);
     position: absolute;
-    transform-origin: top left;
     left: 0;
     top: 0;
     content: "";
     height: 3px;
     width: 100%;
+    -webkit-transform: scaleX(0);
+    -moz-transform: scaleX(0);
+    -ms-transform: scaleX(0);
+    -o-transform: scaleX(0);
+    transform: scaleX(0);
+    -webkit-transform-origin: top left;
+    -moz-transform-origin: top left;
+    -ms-transform-origin: top left;
+    -o-transform-origin: top left;
+    transform-origin: top left;
     -webkit-animation-name: progress;
     -moz-animation-name: progress;
     animation-name: progress;

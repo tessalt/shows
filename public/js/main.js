@@ -73053,12 +73053,14 @@ this["Ember"]["TEMPLATES"] = this["Ember"]["TEMPLATES"] || {};
 this["Ember"]["TEMPLATES"]["application"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
 this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
-  var hashTypes, hashContexts, escapeExpression=this.escapeExpression;
+  var buffer = '', hashTypes, hashContexts, escapeExpression=this.escapeExpression;
 
 
   hashTypes = {};
   hashContexts = {};
   data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "outlet", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("\n");
+  return buffer;
   
 });
 this["Ember"]["TEMPLATES"]["episodes"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
@@ -73213,7 +73215,7 @@ helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
   
 
 
-  data.buffer.push("Loading...");
+  data.buffer.push("<div class=\"loading\">Loading...</div>");
   
 });
 this["Ember"]["TEMPLATES"]["show"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
@@ -73241,7 +73243,7 @@ helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
   
 
 
-  data.buffer.push("Loading Show...");
+  data.buffer.push("<div class=\"loading\">Loading Show...</div>");
   
 });
 this["Ember"]["TEMPLATES"]["shows"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
@@ -73318,7 +73320,7 @@ helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
 function program1(depth0,data) {
   
   
-  data.buffer.push("loading...");
+  data.buffer.push("<div class=\"loading\">loading...</div>");
   }
 
 function program3(depth0,data) {

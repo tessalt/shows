@@ -1,3 +1,8 @@
+$main: #142374;
+$secondary: #128b65;
+$mainDark: #1b234d;
+$secondaryDark: #246450;
+
 body {
   color: #444;
   background: #f5f5f5;
@@ -13,13 +18,19 @@ body {
 }
 
 .btn-dark {
-  background: #4776E6;
-  border-color: #4776E6;
+  background: $main;
+  border-color: $main;
   color: white;
 }
 
+.loading {
+  &:after {
+    background: $secondary;
+  }
+}
+
 .app-header {
-  @include linear-gradient(90deg, #4776E6 10%, #8E54E9 90%);
+  @include linear-gradient(90deg, $mainDark 10%, $secondaryDark 90%);
   .container {
     background: rgba(0,0,0,0.15);
   }
@@ -40,12 +51,12 @@ body {
 
 .shows-search-field {
   border: 0;
-  border-bottom: 2px solid #8E54E9;
+  border-bottom: 2px solid $secondary;
 }
 
 .show {
   h2 {
-    border-bottom: 2px solid #8E54E9;
+    border-bottom: 2px solid $secondary;
   }
 }
 
@@ -57,7 +68,7 @@ body {
 
 .episode {
   h4 {
-    color: #465ec3;
+    color: $main;
   }
 }
 
@@ -67,20 +78,20 @@ body {
     border: 2px solid;
   }
   .upvote {
-    border-color: #8E54E9;
+    border-color: $secondary;
     &:after {
-      border-color: transparent transparent #8E54E9 transparent;
+      border-color: transparent transparent $secondary transparent;
     }
   }
   .downvote {
-    border-color: #465ec3;
+    border-color: $main;
     &:after {
-      border-color: #465ec3 transparent transparent transparent ;
+      border-color: $main transparent transparent transparent ;
     }
   }
 }
 
 .episode-vote-count {
-  background: #465ec3;
+  background: $main;
   color: white;
 }

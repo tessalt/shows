@@ -73,14 +73,17 @@ body {
   color: white; }
 
 .btn-dark {
-  background: #4776E6;
-  border-color: #4776E6;
+  background: #142374;
+  border-color: #142374;
   color: white; }
 
+.loading:after {
+  background: #128b65; }
+
 .app-header {
-  background-color: #4776E6;
-  background-image: -webkit-linear-gradient(-360deg, #4776E6 10%, #8E54E9 90%);
-  background-image: linear-gradient(90deg,#4776E6 10%, #8E54E9 90%); }
+  background-color: #1b234d;
+  background-image: -webkit-linear-gradient(-360deg, #1b234d 10%, #246450 90%);
+  background-image: linear-gradient(90deg,#1b234d 10%, #246450 90%); }
   .app-header .container {
     background: rgba(0, 0, 0, 0.15); }
   .app-header h1 a {
@@ -94,31 +97,31 @@ body {
 
 .shows-search-field {
   border: 0;
-  border-bottom: 2px solid #8E54E9; }
+  border-bottom: 2px solid #128b65; }
 
 .show h2 {
-  border-bottom: 2px solid #8E54E9; }
+  border-bottom: 2px solid #128b65; }
 
 .season h3 {
   background: #fbfbfb; }
 
 .episode h4 {
-  color: #465ec3; }
+  color: #142374; }
 
 .episode-vote-buttons button {
   background: white;
   border: 2px solid; }
 .episode-vote-buttons .upvote {
-  border-color: #8E54E9; }
+  border-color: #128b65; }
   .episode-vote-buttons .upvote:after {
-    border-color: transparent transparent #8E54E9 transparent; }
+    border-color: transparent transparent #128b65 transparent; }
 .episode-vote-buttons .downvote {
-  border-color: #465ec3; }
+  border-color: #142374; }
   .episode-vote-buttons .downvote:after {
-    border-color: #465ec3 transparent transparent transparent; }
+    border-color: #142374 transparent transparent transparent; }
 
 .episode-vote-count {
-  background: #465ec3;
+  background: #142374;
   color: white; }
 
 .app-header {
@@ -151,6 +154,51 @@ body {
     text-decoration: none;
     display: block;
     font-size: 20px; }
+
+@-webkit-keyframes progress {
+  from {
+    transform: scaleX(0); }
+
+  to {
+    transform: scaleX(2); } }
+
+@-moz-keyframes progress {
+  from {
+    transform: scaleX(0); }
+
+  to {
+    transform: scaleX(2); } }
+
+@keyframes progress {
+  from {
+    transform: scaleX(0); }
+
+  to {
+    transform: scaleX(2); } }
+
+.loading {
+  position: relative;
+  position: absolute;
+  width: 100%;
+  text-indent: -9999px; }
+  .loading:after {
+    transform: scaleX(0);
+    position: absolute;
+    transform-origin: top left;
+    left: 0;
+    top: 0;
+    content: "";
+    height: 3px;
+    width: 100%;
+    -webkit-animation-name: progress;
+    -moz-animation-name: progress;
+    animation-name: progress;
+    -webkit-animation-duration: 1s;
+    -moz-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-iteration-count: infinite;
+    -moz-animation-iteration-count: infinite;
+    animation-iteration-count: infinite; }
 
 .shows-search .container {
   padding: 0 16px; }

@@ -28,6 +28,9 @@
 ## To compile client-side assets
 
 `gulp styles`
+
 `gulp templates` (for .hbs files)
+
 `gulp scripts`
+
 `gulp watch`

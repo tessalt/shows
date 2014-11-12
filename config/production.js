@@ -75,7 +75,7 @@ var config = {
   appName: 'Geddy App'
 , detailedErrors: false
 // , hostname: "0.0.0.0"
-// , port: process.env.PORT || 4000
+, port: process.env.PORT || 4000
 , model: {
     defaultAdapter: 'postgres'
   }

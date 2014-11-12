@@ -12,7 +12,7 @@
     "xml2js": "~0.4.4",
     "q": "~1.0.1",
     "ember": "~1.0.0-pre.2",
-    "geddy": "13.0.3"
+    "geddy": "13.x"
   },
   "devDependencies": {
     "ember-handlebars": "~1.2.0",
@@ -30,7 +30,6 @@
     "gulp-wrap": "^0.5.0"
   },
   "engines": {
-    "node": "0.8.x",
-    "npm": "2.1.5"
+    "node": "0.8.x"
   }
 }

@@ -12,8 +12,7 @@
     "xml2js": "~0.4.4",
     "q": "~1.0.1",
     "ember": "~1.0.0-pre.2",
-    "mongodb": "1.x",
-    "geddy": "13.0.x"
+    "geddy": "13.0.3"
   },
   "devDependencies": {
     "ember-handlebars": "~1.2.0",

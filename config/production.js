@@ -74,8 +74,8 @@ var PS_PARSED = parse_url(process.env.HEROKU_POSTGRESQL_MAROON_URL);
 var config = {
   appName: 'Geddy App'
 , detailedErrors: false
-, hostname: "0.0.0.0"
-, port: process.env.PORT || 4000
+// , hostname: "0.0.0.0"
+// , port: process.env.PORT || 4000
 , model: {
     defaultAdapter: 'postgres'
   }

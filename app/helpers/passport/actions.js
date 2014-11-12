@@ -7,8 +7,6 @@ var passport = require('passport')
 
 var SUPPORTED_SERVICES = [
       'twitter'
-    , 'facebook'
-    , 'yammer'
     ];
 
 SUPPORTED_SERVICES.forEach(function (item) {

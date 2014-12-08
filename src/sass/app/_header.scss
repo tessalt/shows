@@ -3,6 +3,14 @@
   h1, ul {
     margin-bottom: 0;
   }
+  h1 {
+    font-size: 20px;
+    padding: 8px 0;
+    @media (min-width: 1074px) {
+      font-size: 32px;
+      padding: 0;
+    }
+  }
   .container {
     padding: 16px;
   }

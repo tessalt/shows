@@ -95,3 +95,15 @@ body {
   background: $main;
   color: white;
 }
+
+.info.container {
+  background: #fff;
+  p {
+    background: lighten($main, 65%);
+  }
+}
+
+.error {
+  background: #F4D6D9;
+  padding: 8px;
+}

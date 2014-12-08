@@ -3,7 +3,9 @@
     <h3 {{action "toggleSeason" on="click"}}>Season {{number}}</h3>
     <div {{bind-attr class=":season-episodes isOpen:open"}}>
       {{#each episodes itemController="episode"}}
-        {{errors}}
+      {{#if errors}}
+      <p class="error">{{errors}}</p>
+      {{/if}}
        <li class="episode">
         <header class="episode-header">
           <div class="episode-header-info">

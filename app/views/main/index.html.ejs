@@ -1,12 +1,12 @@
 <header class="app-header">
   <div class="container cf">
-    <h1 class="app-header-title"><a href="/#/shows">TV Thing </a></h1>
+    <h1 class="app-header-title"><a href="/#/shows">EpisodicTV</a></h1>
     <ul class="app-header-nav">
-      <li><a class="btn btn-white" href="/#externalShows/search">New Show</a></li>
       <% if (user) { %>
+        <li><a class="btn btn-white" href="/#externalShows/search">New Show</a></li>
         <li><%- linkTo('Log out', logoutPath, {class: 'btn btn-white'}) %></li>
       <% } else { %>
-        <li><%- linkTo('log in with Twitter', loginPath, {class: 'btn btn-white'}) %></li>
+        <li><a class="btn btn-white" href="<%= geddy.config.fullHostname %><%= twitterPath %>">Sign in with Twitter</a></li>
       <% } %>
     </ul>
   </div>

@@ -49,6 +49,16 @@ input {
 .app-container-inner {
   padding: 16px; }
 
+.info {
+  padding: 16px 16px 0 16px; }
+  .info p {
+    margin-bottom: 0;
+    padding: 10px; }
+
+button:focus {
+  outline: none;
+  cursor: pointer; }
+
 .btn {
   display: inline-block;
   padding: 8px 12px;
@@ -124,10 +134,26 @@ body {
   background: #142374;
   color: white; }
 
+.info.container {
+  background: #fff; }
+  .info.container p {
+    background: #dbdff9; }
+
+.error {
+  background: #F4D6D9;
+  padding: 8px; }
+
 .app-header {
   overflow: hidden; }
   .app-header h1, .app-header ul {
     margin-bottom: 0; }
+  .app-header h1 {
+    font-size: 20px;
+    padding: 8px 0; }
+    @media (min-width: 1074px) {
+      .app-header h1 {
+        font-size: 32px;
+        padding: 0; } }
   .app-header .container {
     padding: 16px; }
 

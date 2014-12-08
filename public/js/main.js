@@ -73066,7 +73066,7 @@ helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
 this["Ember"]["TEMPLATES"]["episodes"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
 this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
-  var stack1, hashContexts, hashTypes, escapeExpression=this.escapeExpression, helperMissing=helpers.helperMissing, self=this;
+  var stack1, hashContexts, hashTypes, escapeExpression=this.escapeExpression, self=this, helperMissing=helpers.helperMissing;
 
 function program1(depth0,data) {
   
@@ -73100,11 +73100,12 @@ function program1(depth0,data) {
   }
 function program2(depth0,data) {
   
-  var buffer = '', hashTypes, hashContexts;
-  data.buffer.push("\n        ");
+  var buffer = '', stack1, hashTypes, hashContexts;
+  data.buffer.push("\n      ");
   hashTypes = {};
   hashContexts = {};
-  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "errors", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  stack1 = helpers['if'].call(depth0, "errors", {hash:{},inverse:self.noop,fn:self.program(3, program3, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\n       <li class=\"episode\">\n        <header class=\"episode-header\">\n          <div class=\"episode-header-info\">\n            <h4>");
   hashTypes = {};
   hashContexts = {};
@@ -73132,6 +73133,16 @@ function program2(depth0,data) {
   data.buffer.push("</p>\n       </li>\n      ");
   return buffer;
   }
+function program3(depth0,data) {
+  
+  var buffer = '', hashTypes, hashContexts;
+  data.buffer.push("\n      <p class=\"error\">");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "errors", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("</p>\n      ");
+  return buffer;
+  }
 
   hashContexts = {'itemController': depth0};
   hashTypes = {'itemController': "STRING"};
@@ -73149,7 +73160,7 @@ helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
   var buffer = '', stack1, hashContexts, hashTypes, options, helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression;
 
 
-  data.buffer.push("<div class=\"shows-search\">\n  <div class=\"container\">\n    ");
+  data.buffer.push("<div class=\"info container\">\n  <p>Search the TVDB database for an episodes list of your favourite show.</p>\n</div>\n<div class=\"shows-search\">\n  <div class=\"container\">\n    ");
   hashContexts = {'class': depth0,'type': depth0,'placeholder': depth0,'value': depth0,'action': depth0};
   hashTypes = {'class': "STRING",'type': "STRING",'placeholder': "STRING",'value': "ID",'action': "STRING"};
   options = {hash:{
@@ -73288,7 +73299,7 @@ function program2(depth0,data) {
   return buffer;
   }
 
-  data.buffer.push("<div class=\"shows-search\">\n  <div class=\"container\">\n    ");
+  data.buffer.push("<div class=\"info container\">\n  <p>Before you marathon, find out which episodes are worth watching. Because your time is valuable. </p>\n  <p>Or weigh in on which episodes fellow marathoners should watch, because your opinion is valuable.</p>\n</div>\n<div class=\"shows-search\">\n  <div class=\"container\">\n    ");
   hashContexts = {'class': depth0,'type': depth0,'placeholder': depth0,'value': depth0,'action': depth0};
   hashTypes = {'class': "STRING",'type': "STRING",'placeholder': "STRING",'value': "ID",'action': "STRING"};
   options = {hash:{

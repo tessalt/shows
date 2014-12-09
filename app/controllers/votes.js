@@ -17,8 +17,8 @@ var Votes = function () {
   this.create = function (req, resp, params) {
     var self = this;
     var userId = this.session.get('userId');
-    geddy.model.Vote.all({userId: userId, episodeId: params.vote.episodeId}, function(err, vote){
-      if (vote.length > 2) {
+    geddy.model.Vote.first({userId: userId, episodeId: params.vote.episodeId}, function(err, vote){
+      if (vote) {
         self.respond('you\'ve already voted', {
           statusCode: 400,
           format: 'txt'

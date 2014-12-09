@@ -73106,31 +73106,31 @@ function program2(depth0,data) {
   hashContexts = {};
   stack1 = helpers['if'].call(depth0, "errors", {hash:{},inverse:self.noop,fn:self.program(3, program3, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n       <li class=\"episode\">\n        <header class=\"episode-header\">\n          <div class=\"episode-header-info\">\n            <h4>");
-  hashTypes = {};
-  hashContexts = {};
-  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "name", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push("</h4>\n            <p>Episode ");
-  hashTypes = {};
-  hashContexts = {};
-  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "number", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push("</p>\n          </div>\n          <div class=\"episode-header-votes\">\n            <span class=\"episode-vote-count\">");
+  data.buffer.push("\n       <li class=\"episode\">\n        <div class=\"episode-meta episode-cell episode-header-votes\">\n          <div class=\"episode-vote-count\">");
   hashTypes = {};
   hashContexts = {};
   data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "voteCount", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push("</span>\n            <span class=\"episode-vote-buttons\">\n              <button class=\"upvote\" ");
+  data.buffer.push("</div>\n          <span class=\"episode-vote-buttons\">\n            <button class=\"upvote\" ");
   hashTypes = {};
   hashContexts = {};
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "vote", 1, {hash:{},contexts:[depth0,depth0],types:["STRING","INTEGER"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push(">Upvote</button>\n              <button class=\"downvote\" ");
+  data.buffer.push(">Upvote</button>\n            <button class=\"downvote\" ");
   hashTypes = {};
   hashContexts = {};
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "vote", -1, {hash:{},contexts:[depth0,depth0],types:["STRING","INTEGER"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push(">downvote</button>\n            </span>\n          </div>\n        </header>\n         <p class=\"episode-desc\">");
+  data.buffer.push(">downvote</button>\n          </span>\n        </div>\n        <div class=\"episode-body episode-cell\">\n          <header class=\"episode-header\">\n            <div class=\"episode-header-info\">\n              <h4>");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "name", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("</h4>\n              <p>Episode ");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "number", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("</p>\n            </div>\n          </header>\n           <p class=\"episode-desc\">");
   hashTypes = {};
   hashContexts = {};
   data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "description", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push("</p>\n       </li>\n      ");
+  data.buffer.push("</p>\n        </div>\n       </li>\n      ");
   return buffer;
   }
 function program3(depth0,data) {

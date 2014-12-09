@@ -5,105 +5,131 @@ $secondaryDark: #246450;
 
 body {
   color: #444;
-  background: #f5f5f5;
+  background: #262C2E;
 }
 
 .btn {
-  border: 2px solid white;
+  border: 2px solid $main;
 }
 
 .btn-white {
-  border: 2px solid white;
-  color: white;
+  border: 2px solid $main;
+  color: $main;
 }
 
 .btn-dark {
-  background: $main;
-  border-color: $main;
+  background: $secondary;
+  border-color: $secondary;
   color: white;
 }
 
-.loading {
-  &:after {
-    background: $secondary;
-  }
-}
+// .loading {
+//   &:after {
+//     background: $secondary;
+//   }
+// }
 
 .app-header {
-  @include linear-gradient(90deg, $mainDark 10%, $secondaryDark 90%);
+  background:white;
   .container {
-    background: rgba(0,0,0,0.15);
+    // background: rgba(0,0,0,0.15);
   }
   h1 a {
-    color: white;
-  }
-}
-
-.app-container {
-  background: white;
-}
-
-.shows-search {
-  .container {
-    background: white;
-  }
-}
-
-.shows-search-field {
-  border: 0;
-  border-bottom: 2px solid $secondary;
-}
-
-.show {
-  h2 {
-    border-bottom: 2px solid $secondary;
-  }
-}
-
-.season {
-  h3 {
-    background: #fbfbfb;
-  }
-}
-
-.episode {
-  h4 {
     color: $main;
   }
 }
 
+// .app-container {
+//   background: white;
+// }
+
+// .shows-search {
+//   .container {
+//     background: white;
+//   }
+// }
+
+// .shows-search-field {
+//   border: 0;
+//   border-bottom: 2px solid $secondary;
+// }
+
+.show {
+  h2 {
+    // background: lighten(#262C2E, 5%);
+    color: white;
+    // border-bottom: 2px solid $secondary;
+  }
+}
+
+.season {
+  h3 {    
+    background: lighten(#262C2E, 8%);
+    border-top: 2px solid darken(#262C2E, 4%);
+    color: white;
+  }
+}
+
+.episode {
+  // background:rgba(#000, .7);
+  background:white;
+  h4 {
+    // color: white;
+  }
+}
+
+// .episode-header-info {
+//   p {
+//     color: rgba(white, 0.9);
+//   }
+// }
+
+.episode-body {
+  border-bottom: 1px solid black;
+}
+
+.episode-meta {
+   border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+  background:$secondary;
+}
+
 .episode-vote-buttons {
   button {
-    background: white;
-    border: 2px solid;
+    // background: $secondary;
+    // border: 2px solid;
   }
   .upvote {
-    border-color: $secondary;
+    // border-color: $secondary;
     &:after {
-      border-color: transparent transparent $secondary transparent;
+      border-color: transparent transparent rgba(0,0,0,0.5) transparent;
     }
   }
   .downvote {
-    border-color: $main;
+    // border-color: $main;
     &:after {
-      border-color: $main transparent transparent transparent ;
+      border-color: rgba(0,0,0,0.5) transparent transparent transparent ;
     }
   }
 }
 
 .episode-vote-count {
-  background: $main;
+  // border: 2px solid $main;
+  background:rgba(0,0,0,0.2);
   color: white;
 }
 
-.info.container {
-  background: #fff;
-  p {
-    background: lighten($main, 65%);
-  }
-}
+// .episode-desc {
+//   color: white;
+// }
 
-.error {
-  background: #F4D6D9;
-  padding: 8px;
-}
+// .info.container {
+//   background: #fff;
+//   p {
+//     background: lighten($main, 65%);
+//   }
+// }
+
+// .error {
+//   background: #F4D6D9;
+//   padding: 8px;
+// }

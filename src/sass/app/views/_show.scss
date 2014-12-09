@@ -1,6 +1,11 @@
 .show {
   h2 {
-    padding-bottom: 16px;
+    margin-bottom: 0;
+    padding: 16px;
+    @media (min-width: 1074px) {
+      padding: 16px 0;
+      // text-align: center;
+    }
   }
 }
 

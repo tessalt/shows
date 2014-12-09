@@ -13,6 +13,9 @@
   }
   .container {
     padding: 16px;
+     @media (min-width: 1074px) {
+      padding: 16px 0;
+    }
   }
 }
 

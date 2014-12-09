@@ -3,25 +3,43 @@
     padding: 16px;
     line-height: 1;
     cursor: pointer;
+    margin-bottom: 0;
   }
 }
 
 .season-episodes {
   display: none;
-  padding: 0 16px;
   &.open {
     display: block;
   }
 }
 
 .episode {
-  border-bottom: 1px solid rgba(#BFC4CA, 0.4);
+  padding: 0 16px;
   margin-bottom: 16px;
+  position: relative;
+  display: table-row;
   h4 {
     font-size: 16px;
     margin-bottom: 8px;
     line-height: 1;
   }
+}
+
+.episode-cell {
+  // padding: 16px;
+  display: table-cell;
+  vertical-align: top;
+}
+
+.episode-meta {
+  padding-right: 0;
+  // background:rgba(0,0,0,0.10);
+}
+
+.episode-body {
+  padding: 16px;
+  
 }
 
 .episode-header {
@@ -30,67 +48,69 @@
 }
 
 .episode-header-info {
-  float: left;
+  // float: left;
   p {
-    color: #252525;
     font-size: 12px;
     margin-bottom: 0;
   }
 }
 
 .episode-header-votes {
-  float: right;
+  // float: right;
 }
 
 .episode-vote-buttons {
-  float: right;
   display: block;
   button {
     display: block;
     width: 100%;
-    border-radius: 3px;
+    border-radius: 0;
     position: relative;
     text-indent: -9999px;
-    padding: 1px 10px;
+    padding: 10px 10px;
+    background:none;
+    cursor: pointer;
+    border: none;
     &:after {
       content: "";
       width: 0;
       height: 0;
       border-style: solid;
-      right: 4px;
-      top: 4px;
+      left: 50%;
+      transform: translateX(-50%) translateY(-50%);
+      top: 50%;
       position: absolute;
     }
   }
   .upvote {
-    border-bottom-width: 1px;
-    border-radius: 3px 3px 0 0;
+    // border-bottom-width: 1px;
+    // border-radius: 3px 3px 0 0;
     &:after {
-      border-width: 0 6px 6px 6px;
+      border-width: 0 10px 10px 10px;
     }
   }
   .downvote {
-    border-top-width: 1px;
-    border-radius: 0 0 3px 3px;
+    // border-top-width: 1px;
+    // border-radius: 0 0 3px 3px;
     &:after {
-      border-width: 6px 6px 0 6px;
-      top: 5px;
+      border-width: 10px 10px 0 10px;
+      // top: 5px;
     }
   }
 }
 
-.episode-vote-count {
-  float: right;
-  padding: 6px 12px;
-  border-radius: 3px;
-  margin-left: 8px;
+.episode-vote-count { 
+  width: 50px;
+  height: 50px;
+  // margin-left: 8px;
   font-size: 18px;
   font-weight: 700;
+  text-align: center;
+  line-height: 48px;
 }
 
 .episode-desc {
   font-size: 14px;
   line-height: 20px;
-  color: rgba(#000, 0.5);
   font-weight: 400;
 }

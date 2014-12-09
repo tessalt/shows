@@ -7,20 +7,22 @@
       <p class="error">{{errors}}</p>
       {{/if}}
        <li class="episode">
-        <header class="episode-header">
-          <div class="episode-header-info">
-            <h4>{{name}}</h4>
-            <p>Episode {{number}}</p>
-          </div>
-          <div class="episode-header-votes">
-            <span class="episode-vote-count">{{voteCount}}</span>
-            <span class="episode-vote-buttons">
-              <button class="upvote" {{action "vote" 1}}>Upvote</button>
-              <button class="downvote" {{action "vote" -1}}>downvote</button>
-            </span>
-          </div>
-        </header>
-         <p class="episode-desc">{{description}}</p>
+        <div class="episode-meta episode-cell episode-header-votes">
+          <div class="episode-vote-count">{{voteCount}}</div>
+          <span class="episode-vote-buttons">
+            <button class="upvote" {{action "vote" 1}}>Upvote</button>
+            <button class="downvote" {{action "vote" -1}}>downvote</button>
+          </span>
+        </div>
+        <div class="episode-body episode-cell">
+          <header class="episode-header">
+            <div class="episode-header-info">
+              <h4>{{name}}</h4>
+              <p>Episode {{number}}</p>
+            </div>
+          </header>
+           <p class="episode-desc">{{description}}</p>
+        </div>
        </li>
       {{/each}}
     </div>

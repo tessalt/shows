@@ -17,13 +17,13 @@ var Votes = function () {
   this.create = function (req, resp, params) {
     var self = this;
     var userId = this.session.get('userId');
-    geddy.model.Vote.first({userId: userId, episodeId: params.vote.episodeId}, function(err, vote){
-      // if (vote) {
-      //   self.respond('you\'ve already voted', {
-      //     statusCode: 400,
-      //     format: 'txt'
-      //   });
-      // } else {
+    geddy.model.Vote.all({userId: userId, episodeId: params.vote.episodeId}, function(err, vote){
+      if (vote.length > 2) {
+        self.respond('you\'ve already voted', {
+          statusCode: 400,
+          format: 'txt'
+        });
+      } else {
         params.vote.userId = userId;
         var vote = geddy.model.Vote.create(params.vote);
         if (!vote.isValid()) {
@@ -42,7 +42,7 @@ var Votes = function () {
             self.respond(response);
           });
         }
-      // }
+      }
     });
   };
 

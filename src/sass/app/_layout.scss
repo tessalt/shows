@@ -6,13 +6,20 @@
 }
 
 .app-container-inner {
-  // padding: 16px;
+  padding: 16px;
 }
 
 .info {
-  padding: 16px 16px 0 16px;
+  padding: 16px;
+  margin-top: 16px;
+  margin-bottom: 16px;
   p {
     margin-bottom: 0;
     padding: 10px;
   }
+}
+
+.error {
+  padding: 16px;
+  margin-bottom: 0;
 }

@@ -1,14 +1,19 @@
 {{#if loading}}<div class="loading">loading...</div>{{/if}}
 <div class="container app-container">
-  <div class="app-container-inner show">
+  <div class=" show">
     <h2>{{show.SeriesName}}</h2>
     {{errors}}
     <div class="cta">
       <button class="btn btn-dark btn-block" {{action "createShow" this}}>Add Show</button>
     </div>
-    <h3>Episodes</h3>
-    {{#each episodes}}
-      <p>{{EpisodeName}}</p>
-    {{/each}}
+  </div>
+
+  <div class="app-container shows-container">
+    <div class="app-container-inner">
+      <h3>Episodes</h3>
+      {{#each episodes}}
+        <p>{{EpisodeName}}</p>
+      {{/each}}
+    </div>
   </div>
 </div>

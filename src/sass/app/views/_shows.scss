@@ -1,6 +1,7 @@
 .shows-search {
   .container {
     padding: 0 16px;
+    background:lighten(#262C2E, 15%);
   }
 }
 
@@ -8,4 +9,11 @@
   width: 100%;
   font-size: 20px;
   padding: 16px 0;
+  background:lighten(#262C2E, 15%);
+  color: white;
+  border: none;
+}
+
+.shows-container {
+  background: white;
 }

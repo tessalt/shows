@@ -46,11 +46,20 @@ input {
     margin: 0 auto;
     max-width: 800px; } }
 
+.app-container-inner {
+  padding: 16px; }
+
 .info {
-  padding: 16px 16px 0 16px; }
+  padding: 16px;
+  margin-top: 16px;
+  margin-bottom: 16px; }
   .info p {
     margin-bottom: 0;
     padding: 10px; }
+
+.error {
+  padding: 16px;
+  margin-bottom: 0; }
 
 button:focus {
   outline: none;
@@ -84,6 +93,9 @@ body {
   border-color: #128b65;
   color: white; }
 
+.loading:after {
+  background: #128b65; }
+
 .app-header {
   background: white; }
   .app-header h1 a {
@@ -107,6 +119,8 @@ body {
   border-bottom: 1px solid rgba(0, 0, 0, 0.4);
   background: #128b65; }
 
+.episode-vote-buttons button:hover {
+  background: rgba(0, 0, 0, 0.1); }
 .episode-vote-buttons .upvote:after {
   border-color: transparent transparent rgba(0, 0, 0, 0.5) transparent; }
 .episode-vote-buttons .downvote:after {
@@ -116,17 +130,31 @@ body {
   background: rgba(0, 0, 0, 0.2);
   color: white; }
 
+.info.container {
+  background: #06a472;
+  color: white; }
+
+.error {
+  background: #cd0030;
+  color: white; }
+
 .app-header {
   overflow: hidden; }
   .app-header h1, .app-header ul {
     margin-bottom: 0; }
   .app-header h1 {
-    font-size: 20px;
-    padding: 8px 0; }
-    @media (min-width: 1074px) {
-      .app-header h1 {
-        font-size: 32px;
-        padding: 0; } }
+    padding: 0; }
+    .app-header h1 a {
+      background-repeat: no-repeat;
+      text-indent: -9999px;
+      display: block;
+      height: 38px;
+      width: 44px;
+      background: url('../images/tv-small.svg'); }
+      @media (min-width: 768px) {
+        .app-header h1 a {
+          width: 159px;
+          background: url('../images/tv.svg'); } }
   .app-header .container {
     padding: 16px; }
     @media (min-width: 1074px) {
@@ -219,12 +247,19 @@ body {
     animation-iteration-count: infinite; }
 
 .shows-search .container {
-  padding: 0 16px; }
+  padding: 0 16px;
+  background: #495458; }
 
 .shows-search-field {
   width: 100%;
   font-size: 20px;
-  padding: 16px 0; }
+  padding: 16px 0;
+  background: #495458;
+  color: white;
+  border: none; }
+
+.shows-container {
+  background: white; }
 
 .show h2 {
   margin-bottom: 0;

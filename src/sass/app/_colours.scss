@@ -1,7 +1,7 @@
 $main: #142374;
 $secondary: #128b65;
 $mainDark: #1b234d;
-$secondaryDark: #246450;
+$secondaryDark: #154d3b;
 
 body {
   color: #444;
@@ -23,42 +23,22 @@ body {
   color: white;
 }
 
-// .loading {
-//   &:after {
-//     background: $secondary;
-//   }
-// }
+.loading {
+  &:after {
+    background: $secondary;
+  }
+}
 
 .app-header {
   background:white;
-  .container {
-    // background: rgba(0,0,0,0.15);
-  }
   h1 a {
     color: $main;
   }
 }
 
-// .app-container {
-//   background: white;
-// }
-
-// .shows-search {
-//   .container {
-//     background: white;
-//   }
-// }
-
-// .shows-search-field {
-//   border: 0;
-//   border-bottom: 2px solid $secondary;
-// }
-
 .show {
   h2 {
-    // background: lighten(#262C2E, 5%);
     color: white;
-    // border-bottom: 2px solid $secondary;
   }
 }
 
@@ -71,41 +51,28 @@ body {
 }
 
 .episode {
-  // background:rgba(#000, .7);
   background:white;
-  h4 {
-    // color: white;
-  }
 }
-
-// .episode-header-info {
-//   p {
-//     color: rgba(white, 0.9);
-//   }
-// }
 
 .episode-body {
   border-bottom: 1px solid black;
 }
 
 .episode-meta {
-   border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
   background:$secondary;
 }
 
 .episode-vote-buttons {
-  button {
-    // background: $secondary;
-    // border: 2px solid;
+  button:hover {
+    background:rgba(0,0,0,0.1);
   }
   .upvote {
-    // border-color: $secondary;
     &:after {
       border-color: transparent transparent rgba(0,0,0,0.5) transparent;
     }
   }
   .downvote {
-    // border-color: $main;
     &:after {
       border-color: rgba(0,0,0,0.5) transparent transparent transparent ;
     }
@@ -113,23 +80,18 @@ body {
 }
 
 .episode-vote-count {
-  // border: 2px solid $main;
   background:rgba(0,0,0,0.2);
   color: white;
 }
 
-// .episode-desc {
-//   color: white;
-// }
 
-// .info.container {
-//   background: #fff;
-//   p {
-//     background: lighten($main, 65%);
-//   }
-// }
+.info.container {
+  background:#06a472;
+  color: white;
+}
 
-// .error {
-//   background: #F4D6D9;
-//   padding: 8px;
-// }
+
+.error {
+  background:#cd0030;
+  color: white;
+}
